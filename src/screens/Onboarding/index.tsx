@@ -3,11 +3,13 @@ import { DATA } from '../../utils/carrossel';
 import LottieView from 'lottie-react-native';
 import { useNavigation } from '@react-navigation/native';
 import { SwiperFlatList } from 'react-native-swiper-flatlist';
-import { View, Text, Animated, TouchableOpacity } from 'react-native';
+import { View, Text, Animated, TouchableOpacity, Image } from 'react-native';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
+
 import { Background } from '../../components/Background';
+import { ImageCarrossel } from '../../components/ImageCarrossel';
 
 
 export function Onboarding() {
@@ -53,12 +55,21 @@ export function Onboarding() {
             return (
               <View style={styles.containerCarrosel}>
                 <View style={styles.containerImg}>
+                  <ImageCarrossel
+                    icon={item.image}
+                  />
+                  {/*                
+                  <Image
+                    source={item.image}
+                    style={styles.itemImage}
+                  />
                   <LottieView
                     source={item.image}
                     autoPlay
                     loop
                     style={styles.itemImage}
                   />
+                  */}
                   <Text style={styles.flatText}>
                     {item.description}
                   </Text>
@@ -91,7 +102,7 @@ export function Onboarding() {
               </View>
             )
           }}
-        />       
+        />
       </View>
     </Background >
   );

@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Text, TouchableOpacity, View } from 'react-native';
 
 import { styles } from './styles';
+import LogoImg from '../../assets/logo2.svg';
 
 import { Button } from '../../components/Button';
 import { Textarea } from '../../components/Textarea';
@@ -22,6 +23,14 @@ export function CreateAccount() {
 
   return (
     <Background>
+
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <LogoImg
+          width={250}
+          height={250}
+          style={{ top: 40 }}
+        />
+      </View>
 
       <View style={styles.container}>
         <View>
@@ -44,9 +53,9 @@ export function CreateAccount() {
               <Textarea placeholder="Digite seu email" />
               <FormTitle title="Senha" />
               <ListDivider />
-              <Textarea 
-              placeholder="Digite sua senha" 
-              secureTextEntry={true}
+              <Textarea
+                placeholder="Digite sua senha"
+                secureTextEntry={true}
               />
             </View>
           </View>

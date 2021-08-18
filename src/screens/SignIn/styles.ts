@@ -11,6 +11,14 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  image:{
+    width: 150,
+    height: 150,  
+    //color: theme.colors.on,
+    backgroundColor: theme.colors.on,
+    top: 0,
+    position: 'absolute'
+  },
   containerForm:{
     bottom: -60,
     width: width,

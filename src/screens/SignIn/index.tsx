@@ -1,13 +1,15 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { styles } from './styles';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
 
-import { Background } from '../../components/Background';
+import { styles } from './styles';
+import LogoImg from '../../assets/logo2.svg';
+
 import { Button } from '../../components/Button';
-import { ListDivider } from '../../components/ListDivider';
 import { Textarea } from '../../components/Textarea';
 import { FormTitle } from '../../components/FormTitle';
+import { Background } from '../../components/Background';
+import { ListDivider } from '../../components/ListDivider';
 
 export function SignIn() {
 
@@ -24,12 +26,19 @@ export function SignIn() {
   return (
     <Background>
 
-      <View style={styles.container}>
-        <View>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <LogoImg
+          width={250}
+          height={250}
+          style={{ top: 100 }}
+        />
+      </View>
 
-        </View>
+      <View style={styles.container}>
+
 
         <View style={styles.containerForm}>
+
           <View style={styles.form}>
             <Text style={styles.title}>
               Olá novamente, insira os dados para entrar
@@ -61,7 +70,6 @@ export function SignIn() {
             </TouchableOpacity>
           </View>
         </View>
-
 
       </View>
     </Background>

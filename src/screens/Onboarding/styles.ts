@@ -18,14 +18,9 @@ export const styles = StyleSheet.create({
   containerImg: {
     alignItems: 'center',
   },
-  itemImage: {
-    width: 90,
-    height: 205,
-    resizeMode: 'contain'
-  },
   flatText: {
     fontSize: 22,
-    marginTop: 5,   
+    marginTop: 15,   
     letterSpacing: 0,
     textAlign: 'center',
     color: theme.colors.on,
@@ -61,3 +56,11 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title600,
   } 
 });
+
+/*
+  itemImage: {
+    width: 90,
+    height: 205,
+    resizeMode: 'contain'
+  },
+*/
