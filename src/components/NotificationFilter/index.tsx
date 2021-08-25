@@ -21,35 +21,30 @@ export function NotificationFilter() {
   return (
     <View style={styles.container}>
 
-        <SafeAreaView style={styles.formContainer}>
-          <ScrollView style={{ marginBottom: 20 }}>
-            <FormTitle title="Localização" />
-            <ListDivider />
-            <TextDropDown
-              placeholder="Escolha uma andar" />
-            <TextDropDown placeholder="Escolha uma local" />
+      <SafeAreaView style={styles.formContainer}>
+        <ScrollView style={{ marginBottom: 20 }}>
+          <FormTitle title="Localização" />
+          <ListDivider />
+          <TextDropDown placeholder="Escolha uma andar" />
+          <TextDropDown placeholder="Escolha uma local" />
 
-            <FormTitle title="Prioridade" />
-            <ListDivider />
-            <TextDropDown placeholder="Escolha uma prioridade" />
+          <FormTitle title="Prioridade" />
+          <ListDivider />
+          <TextDropDown placeholder="Escolha uma prioridade" />
 
-            <FormTitle title="Frequência" />
-            <ListDivider />
-            <TextDropDown placeholder="Escolha uma frequência" />
+          <FormTitle title="Frequência" />
+          <ListDivider />
+          <TextDropDown placeholder="Escolha uma frequência" />
 
-            <FormTitle title="Categoria" />
-            <ListDivider />
-            <TextDropDown placeholder="Escolha uma Categoria" />
-
-            <FormTitle title="Deixe uma menssagem" />
-            <ListDivider />
-            <Textarea placeholder="Escolha uma menssagem" />
-          </ScrollView>
-          <Button
-            title="Filtrar"
-            onPress={handleCloseFilters}
-          />
-        </SafeAreaView>
+          <FormTitle title="Categoria" />
+          <ListDivider />
+          <TextDropDown placeholder="Escolha uma Categoria" />
+        </ScrollView>
+        <Button
+          title="Filtrar"
+          onPress={handleCloseFilters}
+        />
+      </SafeAreaView>
     </View>
   );
 }

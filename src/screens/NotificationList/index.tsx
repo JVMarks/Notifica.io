@@ -65,6 +65,8 @@ export function NotificationList() {
   return (
     <Background>
       <KeyboardAvoidingView
+        accessible={true}
+        accessibilityLabel={'Lista de notificações'}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}>
 
@@ -79,6 +81,8 @@ export function NotificationList() {
               onPress={handleOpenFilters}
               style={styles.headerfiltericon}>
               <MaterialIcons
+                accessible={true}
+                accessibilityLabel={'pressione o icone de filtro para filtrar'}
                 name='filter-alt'
                 size={32}
                 color={theme.colors.primary}

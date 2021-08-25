@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: ''
+  baseURL: 'http://192.168.0.4:19012'
 });
 
 export { api }
@@ -34,6 +34,10 @@ expo install expo-auth-session expo-random
 yarn add dotenv babel-plugin-inline-dotenv
 yarn add react-native-uuid
 
+------------------------------------------
+to start the code:
+APP - expo start 
+SERVER - json-server ./src/services/server.json --host 192.168.0.4 --port 19012
 
 Versão dos pacotes:
 npx react-native upgrade
@@ -46,3 +50,4 @@ choco upgrade nodejs-lts
 
  npm cache clean -f 
 */
+

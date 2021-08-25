@@ -23,6 +23,8 @@ export function CreateNotification() {
   return (
     <Background>
       <KeyboardAvoidingView
+        accessible={true}
+        accessibilityLabel={'Tela criação de notificação'}
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
         enabled={Platform.OS === "ios" ? true : false}
@@ -53,6 +55,8 @@ export function CreateNotification() {
             <Textarea placeholder="Escolha uma menssagem" />
           </ScrollView>
           <Button
+            accessible={true}
+            accessibilityLabel={'Pressione o botão para criar a notificação'}
             title="Notificar"
             onPress={hadleNotificationList}
           />

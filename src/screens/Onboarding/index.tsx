@@ -32,7 +32,10 @@ export function Onboarding() {
 
   return (
     <Background>
-      <View style={styles.container}>
+      <View
+        style={styles.container}
+        accessible={true}
+      >
         <SwiperFlatList
           autoplay
           index={2}
@@ -50,7 +53,7 @@ export function Onboarding() {
           paginationStyleItem={{ width: 10, height: 10 }}
           paginationActiveColor={theme.colors.secondary100}
           onScroll={() => Animated.event([], { useNativeDriver: false })}
-          paginationStyle={{ borderBottomColor: theme.colors.secondary100, bottom: 180 }}
+          paginationStyle={{ borderBottomColor: theme.colors.secondary100, bottom: 165 }}
           renderItem={({ item }) => {
             return (
               <View style={styles.containerCarrosel}>
@@ -79,9 +82,11 @@ export function Onboarding() {
                   <View style={styles.containerbuttons}>
 
                     <TouchableOpacity
-                      style={styles.buttonCreateAccont}
+                      accessible={true}
+                      accessibilityLabel={'Pressione o botão para criar conta'}
                       activeOpacity={0.6}
                       onPress={hadleCreateAccount}
+                      style={styles.buttonCreateAccont}
                     >
                       <Text style={styles.buttonCreateAcconttxt}>
                         Criar conta
@@ -89,6 +94,8 @@ export function Onboarding() {
                     </TouchableOpacity>
 
                     <TouchableOpacity
+                      accessible={true}
+                      accessibilityLabel="Pressione o botão para logar na conta"
                       activeOpacity={0.6}
                       onPress={hadleSignIn}
                     >

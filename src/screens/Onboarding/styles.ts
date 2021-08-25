@@ -22,6 +22,7 @@ export const styles = StyleSheet.create({
     fontSize: 22,
     marginTop: 15,   
     letterSpacing: 0,
+    lineHeight: 30,
     textAlign: 'center',
     color: theme.colors.on,
     fontFamily: theme.fonts.text400,

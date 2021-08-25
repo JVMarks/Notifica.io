@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, ViewProps, Text } from 'react-native';
-import { RectButton } from 'react-native-gesture-handler';
+import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { Feather } from '@expo/vector-icons';
 
-interface NotificationProps extends ViewProps {
+interface NotificationProps extends RectButtonProps {
   data: {
     //andar: string,
     local: string,
@@ -22,7 +22,7 @@ interface NotificationProps extends ViewProps {
 export function NotificationCard({ data, ...rest }: NotificationProps) {
 
   return (
-    <View
+    <RectButton
       style={styles.container}
       {...rest}
     >
@@ -62,6 +62,6 @@ export function NotificationCard({ data, ...rest }: NotificationProps) {
           {`às ${data.horas}`}
         </Text>
       </View>
-    </View>
+    </RectButton>
   );
 }

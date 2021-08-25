@@ -9,13 +9,14 @@ import {
 import AppLoading from 'expo-app-loading';
 import { useFonts } from 'expo-font';
 
+import { Routes } from './src/routes';
+import { Background } from './src/components/Background';
+
+console.disableYellowBox = true;
 LogBox.ignoreLogs([
 'You are not currently signed in to Expo on your development machine.',
 'Stack Navigator: headerMode="none" is deprecated. Use headerShown: false in screenOptions instead.', 
 'Warning: Failed prop type: Invalid props.style key `resizeMode` supplied to `LottieView`.' ]);
-
-import { Routes } from './src/routes';
-import { Background } from './src/components/Background';
 
 export default function App() {
   const [fontsLoaded] = useFonts({

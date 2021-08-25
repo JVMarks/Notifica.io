@@ -29,16 +29,22 @@ export function Background({ children }: Props) {
           style={{ top: -20, left: 65, position: 'absolute' }}
         />
 
+        <CirMei
+          width={120}
+          height={120}
+          style={{ top: 340, left: 78 }}
+        />
+
         <CirDi
-          width={150}
-          height={150}
-          style={{ bottom: -400, right: -250 }}
+          width={180}
+          height={180}
+          style={{ bottom: -300, right: -220 }}
         />
 
         <CirMei
-          width={250}
-          height={250}
-          style={{ bottom: -370, right: 140 }}
+          width={180}
+          height={180}
+          style={{ bottom: -240, right: 80 }}
         />
 
       </View>

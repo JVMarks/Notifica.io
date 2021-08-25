@@ -12,25 +12,25 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   image:{
+    top: 0,
     width: 150,
     height: 150,  
+    position: 'absolute',
     //color: theme.colors.on,
     backgroundColor: theme.colors.on,
-    top: 0,
-    position: 'absolute'
   },
   containerForm:{
     bottom: -60,
     width: width,
     borderRadius: 80,
-    height: height/1.3,
+    height: height/1.26,
     position: 'absolute',
     //justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
     marginBottom: getStatusBarHeight() - height/5,
   },
   form:{
-    paddingHorizontal: 50,
+    paddingHorizontal: 70,
   },
   title: {
     fontSize: 17,

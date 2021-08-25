@@ -18,6 +18,7 @@ const AuthRoutes = () => {
   return (
     <AppTab.Navigator
       screenOptions={{
+        tabBarAccessibilityLabel: 'Menu de navegação',
         tabBarInactiveTintColor: theme.colors.CreateAccont,
         tabBarActiveTintColor: theme.colors.line,
         //tabBarActiveBackgroundColor: theme.colors.line,
@@ -48,6 +49,7 @@ const AuthRoutes = () => {
         name="Bem vindo"
         component={Home}
         options={{
+          tabBarAccessibilityLabel: 'Home',
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="home"
@@ -62,6 +64,7 @@ const AuthRoutes = () => {
         name="Visualizar lista"
         component={NotificationList}
         options={{
+          tabBarAccessibilityLabel: 'Visualizar lista de notificações',
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="list-alt"
@@ -76,6 +79,7 @@ const AuthRoutes = () => {
         name="Criar nova chamada"
         component={CreateNotification}
         options={{
+          tabBarAccessibilityLabel: 'Criar nova chamada',
           tabBarIcon: (({ size, color }) => (
             <View style={{ backgroundColor: theme.colors.white, marginBottom: 47, borderRadius: 100 }}>
               <MaterialIcons
@@ -92,6 +96,7 @@ const AuthRoutes = () => {
         name="Fale conosco"
         component={Feedback}
         options={{
+          tabBarAccessibilityLabel: 'Fale conosco',
           tabBarIcon: (({ size, color }) => (
             <MaterialIcons
               name="message"
@@ -106,6 +111,7 @@ const AuthRoutes = () => {
         name="Configuracões"
         component={Controls}
         options={{
+          tabBarAccessibilityLabel: 'Menu de configurações',
           tabBarIcon: (({ size, color }) => (
             <FontAwesome5
               name='toolbox'

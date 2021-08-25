@@ -6,12 +6,13 @@ import { theme } from '../global/styles/theme';
 
 import { Home } from '../screens/Home';
 import { SignIn } from '../screens/SignIn';
-import { Onboarding } from '../screens/Onboarding';
-import { CreateAccount } from '../screens/CreateAccount';
-import { CreateNotification } from '../screens/CreateNotification';
-import { NotificationList } from '../screens/NotificationList';
-import { Controls } from '../screens/Controls';
 import { Feedback } from '../screens/Feedback';
+import { Controls } from '../screens/Controls';
+import { Onboarding } from '../screens/Onboarding';
+import { Confirmation } from '../screens/Confirmation';
+import { CreateAccount } from '../screens/CreateAccount';
+import { NotificationList } from '../screens/NotificationList';
+import { CreateNotification } from '../screens/CreateNotification';
 
 
 const { Navigator, Screen } = createStackNavigator();
@@ -19,7 +20,6 @@ const { Navigator, Screen } = createStackNavigator();
 export function AppRoutes() {
   return (
     <Navigator
-      //headerMode="none"
       screenOptions={{
         headerShown: false,
         cardStyle: {
@@ -41,6 +41,11 @@ export function AppRoutes() {
       <Screen
         name="SignIn"
         component={SignIn}
+      />
+
+      <Screen
+        name="Confirmation"
+        component={Confirmation}
       />
 
       <Screen

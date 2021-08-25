@@ -12,17 +12,17 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerForm:{
-    bottom: -60,
+    bottom: -35,
     width: width,
     borderRadius: 80,
-    height: height/1.3,
+    height: height/1.2,
     position: 'absolute',
     //justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
     marginBottom: getStatusBarHeight() - height/9,
   },
   form:{
-    paddingHorizontal: 50,
+    paddingHorizontal: 65,
   },
   title: {
     fontSize: 17,
@@ -31,10 +31,10 @@ export const styles = StyleSheet.create({
     fontFamily: theme.fonts.title500,
   },
   containerInput:{
-    marginTop: 25,
+    marginTop: 8,
   },
   containerButton:{
-    marginTop: 35,
+    marginTop: 15,
     paddingHorizontal: 35,
   },
   loginButton:{
@@ -43,5 +43,17 @@ export const styles = StyleSheet.create({
     textAlign: 'center',
     color: theme.colors.CreateAccont,
     fontFamily: theme.fonts.title600,
-  } 
+  },
+  radioButton:{
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  txtRadio:{
+    fontSize: 16,
+    marginRight: 60,
+    textAlign: 'center',
+    color: theme.colors.black,
+    fontFamily: theme.fonts.text400,
+  }
 });

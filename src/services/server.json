@@ -1,5 +1,5 @@
 {
-  "floor":[
+  "floors":[
     {"key": "ground-floor", "title": "Térrio"},
     {"key": "first_floor", "title": "1° Andar"},
     {"key": "second_floor", "title": "2° Andar"},
@@ -17,19 +17,19 @@
     {"key": "meeting_room", "title": "Sala de reunião"}
   ],
 
-  "notification_priority":[
+  "notification_prioritys":[
     {"key": "important", "title": "Importante"},
     {"key": "not important", "title": "Não importante"},
     {"key": "urgent", "title": "Urgente"},
     {"key": "not urgent", "title": "Não urgente"}
   ],
 
-  "notification_frequency":[
-    {"key": "uncommon", "title": "Incomum"},
-    {"key": "recurrent", "title": "Recorrente"}
+  "notification_frequencys":[
+    {"key": "uncommon", "title": "Incomum", "color": "RED"},
+    {"key": "recurrent", "title": "Recorrente", "color": "BLUE"}
   ],
 
-  "notification_category":[
+  "notification_categorys":[
     {"key": "cleaning", "title": "Limpeza"},
     {"key": "maintenance", "title": "Manutenção"},
     {"key": "retirement", "title": "Reforma"},
@@ -37,7 +37,7 @@
     {"key": "accident", "title": "Acidente"}
   ],
 
-  "notification":[
+  "notifications":[
     {
      "id": 1,
      "floor": ["first_floor","1° Andar"],
@@ -46,8 +46,10 @@
      "frequency":["recurrent", "Recorrente"],
      "category":["setback", "Contratempo"],
      "message": "Revisão nos disjuntores",
-     "notifier": "João",
-     "hours": "12:30"
+     "notifier": {
+      "username": "João",
+      "hours": "10:54"
+    }
     },
     {
       "id": 2,
@@ -57,8 +59,10 @@
       "frequency":["recurrent", "Recorrente"],
       "category":["setback", "Contratempo"],
       "message": "Revisão nos disjuntores",
-      "notifier": "Antonio",
-      "hours": "15:30"
+      "notifier": {
+        "username": "Antonio",
+        "hours": "13:54"
+      }
      },
      {
       "id": 3,
@@ -68,8 +72,10 @@
       "frequency":["recurrent", "Recorrente"],
       "category":["setback", "Contratempo"],
       "message": "Revisão nos disjuntores",
-      "notifier": "Igor",
-      "hours": "07:30"
+      "notifier": {
+        "username": "Willian",
+        "hours": "9:54"
+      }
      },
      {
       "id": 4,
@@ -79,8 +85,10 @@
       "frequency":["recurrent", "Recorrente"],
       "category":["setback", "Contratempo"],
       "message": "Revisão nos disjuntores",
-      "notifier": "Willian",
-      "hours": "9:54"
+      "notifier": {
+        "username": "Igor",
+        "hours": "11:54"
+      }
      },
      {
       "id": 5,
@@ -90,41 +98,43 @@
       "frequency":["recurrent", "Recorrente"],
       "category":["setback", "Contratempo"],
       "message": "Revisão nos disjuntores",
-      "notifier": "Victor",
-      "hours": "14:20"
+      "notifier": {
+        "username": "Victor",
+        "hours": "15:30"
+      }
      }
   ],
 
-  "user":[
+  "users":[
     {
       "id": 1,
-      "nome": "João",
+      "name": "João",
       "email": "abc@hotmail.com",
-      "senha": "123"
+      "password": "123"
     },
     {
       "id": 2,
-      "nome": "Antonio",
+      "name": "Antonio",
       "email": "cba@hotmail.com",
-      "senha": "123"
+      "password": "123"
     },
     {
       "id": 3,
-      "nome": "Victor",
+      "name": "Victor",
       "email": "bbb@hotmail.com",
-      "senha": "123"
+      "password": "123"
     },
     {
       "id": 4,
-      "nome": "Igor",
+      "name": "Igor",
       "email": "ccc@hotmail.com",
-      "senha": "123"
+      "password": "123"
     },
     {
       "id": 5,
-      "nome": "Willian",
+      "name": "Willian",
       "email": "cba@hotmail.com",
-      "senha": "123"
+      "password": "123"
     }
   ]
 }

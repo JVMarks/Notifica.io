@@ -8,6 +8,7 @@ export const styles = StyleSheet.create({
     marginTop: 7,
     width: '100%',
     borderWidth: 4,
+    marginBottom: 3,
     borderRadius: 18,
     textAlign: 'left',
     paddingHorizontal: 15,

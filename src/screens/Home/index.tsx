@@ -44,7 +44,7 @@ export function Home() {
     <Background>
       <View style={styles.container}>
         <View style={styles.header}>
-          <View style={{ marginTop: 40}}>
+          <View style={{ marginTop: 40 }}>
             <View style={styles.perfil}>
               <Profile />
             </View>
@@ -59,6 +59,8 @@ export function Home() {
 
         <View style={styles.containerButtons}>
           <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'pressione o botão para entrar na tela de criação de notificação'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleCreateNotification}
@@ -74,6 +76,8 @@ export function Home() {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'pressione o botão para entrar na tela de lista de notificação'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleNotificationList}
@@ -89,6 +93,8 @@ export function Home() {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'pressione o botão para entrar na tela de feedback'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleFeedback}
@@ -104,6 +110,8 @@ export function Home() {
           </TouchableOpacity>
 
           <TouchableOpacity
+            accessible={true}
+            accessibilityLabel={'pressione o botão para entrar na tela de configurações'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleControls}
