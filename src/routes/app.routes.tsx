@@ -72,8 +72,7 @@ export function AppRoutes() {
         name="Feedback"
         component={Feedback}
       />
-
-
+      
     </Navigator>
   )
 }

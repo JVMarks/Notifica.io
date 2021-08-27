@@ -1,28 +1,19 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { View, Text, TouchableOpacity } from 'react-native';
-
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { MaterialIcons, FontAwesome5, Ionicons } from '@expo/vector-icons';
 
+import { DATA } from '../../utils/NotificationEX';
 import { Profile } from '../../components/Profile';
 import { Background } from '../../components/Background';
-import { DATA } from '../../utils/NotificationEX';
-
 
 export function Home() {
 
-  const [loading, setLoading] = useState(true);
   const navigation = useNavigation();
-
-  /*
-  function handleAppointmentCreate() {
-    navigation.navigate('');
-  }
-  */
 
   function hadleCreateNotification() {
     navigation.navigate('CreateNotification');
@@ -42,22 +33,32 @@ export function Home() {
 
   return (
     <Background>
-      <View style={styles.container}>
-        <View style={styles.header}>
+      <View
+        accessible={true}
+        accessibilityLabel={'Tela Home'}
+        style={styles.container}>
+        <View
+          accessible={true}
+          style={styles.header}>
           <View style={{ marginTop: 40 }}>
             <View style={styles.perfil}>
               <Profile />
             </View>
 
             <View style={styles.countNotification}>
-              <Text style={styles.countText}>
+              <Text
+                accessibilityLabel={`${DATA.length} Novas notificações`}
+                style={styles.countText}>
                 {`${DATA.length} Novas notificações`}
               </Text>
             </View>
           </View>
         </View>
 
-        <View style={styles.containerButtons}>
+        <View
+          accessible={true}
+          accessibilityLabel={'Opções disponiveis de botões para navegação'}
+          style={styles.containerButtons}>
           <TouchableOpacity
             accessible={true}
             accessibilityLabel={'pressione o botão para entrar na tela de criação de notificação'}
@@ -70,7 +71,9 @@ export function Home() {
               size={54}
               color={theme.colors.CreateAccont2}
             />
-            <Text style={styles.text}>
+            <Text
+              accessibilityLabel={'Criar notificação'}
+              style={styles.text}>
               Criar notificação
             </Text>
           </TouchableOpacity>
@@ -87,14 +90,16 @@ export function Home() {
               size={54}
               color={theme.colors.CreateAccont2}
             />
-            <Text style={styles.text}>
+            <Text
+              accessibilityLabel={'Exibir notificações'}
+              style={styles.text}>
               Exibir notificações
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             accessible={true}
-            accessibilityLabel={'pressione o botão para entrar na tela de feedback'}
+            accessibilityLabel={'Pressione o botão para entrar na tela de feedback'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleFeedback}
@@ -104,14 +109,16 @@ export function Home() {
               size={54}
               color={theme.colors.CreateAccont2}
             />
-            <Text style={styles.text}>
+            <Text
+              accessibilityLabel={'Feedback’s'}
+              style={styles.text}>
               Feedback’s
             </Text>
           </TouchableOpacity>
 
           <TouchableOpacity
             accessible={true}
-            accessibilityLabel={'pressione o botão para entrar na tela de configurações'}
+            accessibilityLabel={'Pressione o botão para entrar na tela de configurações'}
             style={styles.buttons}
             activeOpacity={0.6}
             onPress={hadleControls}
@@ -121,7 +128,9 @@ export function Home() {
               size={54}
               color={theme.colors.CreateAccont2}
             />
-            <Text style={styles.text}>
+            <Text
+              accessibilityLabel={'Configurações'}
+              style={styles.text}>
               Configurações
             </Text>
           </TouchableOpacity>

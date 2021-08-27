@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react';
-import { View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 import { RectButton } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
 
 import { DATA } from '../../utils/NotificationEX';
 
@@ -10,10 +10,10 @@ import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { MaterialIcons } from '@expo/vector-icons';
 
+import { ModalView } from '../../components/ModelView';
 import { Background } from '../../components/Background';
 import { TextDropDown } from '../../components/TextDropDown';
 import { NotificationCard } from '../../components/NotificationCard';
-import { ModalView } from '../../components/ModelView';
 import { NotificationFilter } from '../../components/NotificationFilter';
 
 export function NotificationList() {
@@ -60,29 +60,33 @@ export function NotificationList() {
     setOpenFiltersModal(false);
   }
 
-
-
   return (
     <Background>
       <KeyboardAvoidingView
         accessible={true}
-        accessibilityLabel={'Lista de notificações'}
+        accessibilityLabel={'Tela lista de notificações'}
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         style={styles.container}>
 
 
-        <View style={styles.header}>
+        <View
+          accessible={true}
+          accessibilityLabel={'seleção de filtros'}
+          style={styles.header}>
           <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', }}>
             <TextDropDown
+              accessible={true}
+              accessibilityLabel={'Selecione um andar'}
               style={styles.selecionFloor}
               placeholder="Selecione um andar"
             />
             <RectButton
               onPress={handleOpenFilters}
-              style={styles.headerfiltericon}>
+              style={styles.headerfiltericon}
+            >
               <MaterialIcons
                 accessible={true}
-                accessibilityLabel={'pressione o icone de filtro para filtrar'}
+                accessibilityLabel={'Pressione o icone de filtro para filtrar'}
                 name='filter-alt'
                 size={32}
                 color={theme.colors.primary}
@@ -93,6 +97,8 @@ export function NotificationList() {
 
 
         <FlatList
+          accessible={true}
+          accessibilityLabel={"lista de notifiçãoes do dia"}
           data={DATA}
           keyExtractor={(item) => String(item.id)}
           renderItem={({ item }) => (
@@ -118,7 +124,12 @@ export function NotificationList() {
           }}
         />
 
-        <ModalView visible={OpenFiltersModal} closeModal={handleCloseFilters}>
+        <ModalView
+          accessibilityLabel={'filtro ativado para selecionar as opções'}
+          accessible={true}
+          visible={OpenFiltersModal}
+          closeModal={handleCloseFilters}
+        >
           <NotificationFilter />
         </ModalView>
 

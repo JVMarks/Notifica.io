@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
+import React, { useEffect, useState } from 'react';
 import { RectButton } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { Avatar } from '../Avatar';
 import { styles } from './styles';
@@ -20,22 +20,31 @@ export function Profile() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View
+      accessible={true}
+      accessibilityLabel={'Seu perfil'}
+      style={styles.container}>
       <RectButton>
         <Avatar urlImage={'https://avatars.githubusercontent.com/u/50274461?v=4'} />
       </RectButton>
       <View>
         <View style={styles.user}>
-          <Text style={styles.greeting}>
+          <Text
+            accessibilityLabel={'Olá,'}
+            style={styles.greeting}>
             Olá,
           </Text>
 
-          <Text style={styles.username}>
+          <Text
+            accessibilityLabel={userName}
+            style={styles.username}>
             {userName}
           </Text>
         </View>
 
-        <Text style={styles.message}>
+        <Text
+          accessibilityLabel={'Já fez uma boa ação hoje?'}
+          style={styles.message}>
           Já fez uma boa ação hoje?
         </Text>
       </View>

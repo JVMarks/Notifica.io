@@ -1,7 +1,6 @@
 import React from 'react';
-import { useNavigation, useRoute } from '@react-navigation/core';
 import { SafeAreaView, Text, View } from 'react-native';
-
+import { useNavigation, useRoute } from '@react-navigation/core';
 
 import { styles } from './styles';
 import { Button } from '../../components/Button';
@@ -39,19 +38,30 @@ export function Confirmation() {
 
   return (
     <Background>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView
+        accessible={true}
+        accessibilityLabel={"Tela de confirmação da conta"}
+        style={styles.container}>
         <View style={styles.content}>
-          <Text style={styles.emoji}>
+          <Text
+            accessibilityLabel={emojis[icon]}
+            style={styles.emoji}>
             {emojis[icon]}
           </Text>
-          <Text style={styles.title}>
+          <Text
+            accessibilityLabel={title}
+            style={styles.title}>
             {title}
           </Text>
-          <Text style={styles.subtitle}>
+          <Text
+            accessibilityLabel={subtitle}
+            style={styles.subtitle}>
             {subtitle}
           </Text>
           <View style={styles.footer}>
             <Button
+              accessible={true}
+              accessibilityLabel={`Pressione o botão ${buttonTitle} para continuar`}
               title={buttonTitle}
               onPress={handleMoveOn}
             />

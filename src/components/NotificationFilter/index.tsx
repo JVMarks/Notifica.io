@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from 'react';
+import { View, SafeAreaView, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { KeyboardAvoidingView, Platform, View, SafeAreaView, ScrollView } from 'react-native';
 
 import { styles } from './styles';
 
 import { Button } from '../../components/Button';
-import { Textarea } from '../../components/Textarea';
 import { FormTitle } from '../../components/FormTitle';
-import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
 import { TextDropDown } from '../../components/TextDropDown';
 
@@ -19,28 +17,66 @@ export function NotificationFilter() {
   }
 
   return (
-    <View style={styles.container}>
+    <View
+      accessible={true}
+      accessibilityLabel={"Filtre as notificações com as opções disponiveis"}
+      style={styles.container}
+    >
 
       <SafeAreaView style={styles.formContainer}>
         <ScrollView style={{ marginBottom: 20 }}>
-          <FormTitle title="Localização" />
+          <FormTitle
+            accessibilityLabel={"Localização"}
+            title="Localização"
+          />
           <ListDivider />
-          <TextDropDown placeholder="Escolha uma andar" />
-          <TextDropDown placeholder="Escolha uma local" />
+          <TextDropDown
+            accessible={true}
+            accessibilityLabel={"Escolha uma andar"}
+            placeholder="Escolha uma andar"
+          />
+          <TextDropDown
+            accessible={true}
+            accessibilityLabel={"Escolha uma local"}
+            placeholder="Escolha uma local"
+          />
 
-          <FormTitle title="Prioridade" />
+          <FormTitle
+            accessibilityLabel={"Prioridade"}
+            title="Prioridade"
+          />
           <ListDivider />
-          <TextDropDown placeholder="Escolha uma prioridade" />
+          <TextDropDown
+            accessible={true}
+            accessibilityLabel={"Escolha uma prioridade"}
+            placeholder="Escolha uma prioridade"
+          />
 
-          <FormTitle title="Frequência" />
+          <FormTitle
+            accessibilityLabel={"Frequência"}
+            title="Frequência"
+          />
           <ListDivider />
-          <TextDropDown placeholder="Escolha uma frequência" />
+          <TextDropDown
+            accessible={true}
+            accessibilityLabel={"Escolha uma frequência"}
+            placeholder="Escolha uma frequência"
+          />
 
-          <FormTitle title="Categoria" />
+          <FormTitle
+            accessibilityLabel={"Categoria"}
+            title="Categoria"
+          />
           <ListDivider />
-          <TextDropDown placeholder="Escolha uma Categoria" />
+          <TextDropDown
+            accessible={true}
+            accessibilityLabel={"Escolha uma Categoria"}
+            placeholder="Escolha uma Categoria"
+          />
         </ScrollView>
         <Button
+          accessible={true}
+          accessibilityLabel={"Pressione o botão para filtrar as notificações"}
           title="Filtrar"
           onPress={handleCloseFilters}
         />

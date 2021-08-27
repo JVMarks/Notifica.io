@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react';
-import { KeyboardAvoidingView, Platform, View, SafeAreaView, ScrollView } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView } from 'react-native';
 
 import { styles } from './styles';
 
@@ -30,33 +30,72 @@ export function CreateNotification() {
         enabled={Platform.OS === "ios" ? true : false}
         style={styles.container}>
 
-        <SafeAreaView style={styles.formContainer}>
+        <SafeAreaView
+          accessible={true}
+          accessibilityLabel={'Formulario para criação de notificação'}
+          style={styles.formContainer}
+        >
           <ScrollView style={{ marginBottom: 20 }}>
-            <FormTitle title="Localização" />
+            <FormTitle
+              accessibilityLabel={'Localização'}
+              title="Localização"
+            />
             <ListDivider />
             <TextDropDown
-              placeholder="Escolha uma andar" />
-            <TextDropDown placeholder="Escolha uma local" />
+              accessibilityLabel={'Escolha uma andar'}
+              placeholder="Escolha uma andar"
+            />
 
-            <FormTitle title="Prioridade" />
-            <ListDivider />
-            <TextDropDown placeholder="Escolha uma prioridade" />
+            <TextDropDown
+              accessibilityLabel={'Escolha uma local'}
+              placeholder="Escolha uma local"
+            />
 
-            <FormTitle title="Frequência" />
-            <ListDivider />
-            <TextDropDown placeholder="Escolha uma frequência" />
 
-            <FormTitle title="Categoria" />
+            <FormTitle
+              accessibilityLabel={'Prioridade'}
+              title="Prioridade"
+            />
             <ListDivider />
-            <TextDropDown placeholder="Escolha uma Categoria" />
+            <TextDropDown
+              accessibilityLabel={'Escolha uma prioridade'}
+              placeholder="Escolha uma prioridade"
+            />
 
-            <FormTitle title="Deixe uma menssagem" />
+            <FormTitle
+              accessibilityLabel={'Frequência'}
+              title="Frequência"
+            />
             <ListDivider />
-            <Textarea placeholder="Escolha uma menssagem" />
+            <TextDropDown
+              accessibilityLabel={'Escolha uma frequência'}
+              placeholder="Escolha uma frequência"
+            />
+
+            <FormTitle
+              accessibilityLabel={'Categoria'}
+              title="Categoria"
+            />
+            <ListDivider />
+            <TextDropDown
+              accessibilityLabel={'Escolha uma Categoria'}
+              placeholder="Escolha uma Categoria"
+            />
+
+            <FormTitle
+              accessibilityLabel={'Deixe uma menssagem'}
+              title="Deixe uma menssagem"
+            />
+            <ListDivider />
+            <Textarea
+              accessibilityLabel={'Escolha uma menssagem'}
+              placeholder="Escolha uma menssagem"
+            />
+
           </ScrollView>
           <Button
             accessible={true}
-            accessibilityLabel={'Pressione o botão para criar a notificação'}
+            accessibilityLabel={'Pressione o botão para criar a notificação e navegar para a tela de lista de notifições'}
             title="Notificar"
             onPress={hadleNotificationList}
           />

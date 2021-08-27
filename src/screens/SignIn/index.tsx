@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigation, useRoute } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Text, TouchableOpacity, View, Image, Alert } from 'react-native';
 
-//import { UserProps, loadUser } from '../../libs/userStorage';
-
 import { styles } from './styles';
 import LogoImg from '../../assets/logo2.svg';
-import { theme } from '../../global/styles/theme';
 
 import { Button } from '../../components/Button';
 import { Textarea } from '../../components/Textarea';
@@ -16,44 +13,36 @@ import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
 
 export function SignIn() {
-
-  const [isFocused, setIsFocused] = useState(false)
-  const [isFilled, setIsFilled] = useState(false);
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
   const navigation = useNavigation();
 
-  function handleInputBluer() {
-    setIsFocused(false);
-    setIsFilled(!!email);
-    setIsFilled(!!password);
-  }
-
-  function handleInputFocus() {
-    setIsFocused(true);
-  }
-
-  function handleInputChange(value: string) {
-    setIsFilled(!!value);
+  function handleInputEmail(value: string) {
     setEmail(value);
+  }
+
+  function handleInputPassword(value: string) {
     setPassword(value);
+  }
+
+  function hadleCreateAccount() {
+    navigation.navigate('CreateAccount');
   }
 
   async function hadleSubmit() {
 
     if (!password && !email) {
-      return Alert.alert('Preciso do seu e-mail, e senha 😬');
+      return Alert.alert('Preciso do E-mail, e senha registrados no sistema 😬');
     }
     if (!email) {
-      return Alert.alert('Me diz o seu e-mail 😥');
+      return Alert.alert('Por favor, me diz o seu E-mail para eu saber quem você é 😥');
     }
     if (!password) {
-      return Alert.alert('Digite sua senha 🤐');
+      return Alert.alert('Por favor, digite sua senha corretamente 🤐');
     }
 
     try {
-
       await AsyncStorage.setItem('@notificamanager:users', email && password);
       navigation.navigate('Home')
     } catch {
@@ -61,14 +50,13 @@ export function SignIn() {
     }
   }
 
-  function hadleCreateAccount() {
-    navigation.navigate('CreateAccount');
-  }
-
   return (
     <Background>
 
-      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <View
+        accessible={true}
+        accessibilityLabel={'Logo Notifica.Io'}
+        style={{ justifyContent: 'center', alignItems: 'center' }}>
         <LogoImg
           width={220}
           height={220}
@@ -78,33 +66,38 @@ export function SignIn() {
 
       <View
         accessible={true}
-        accessibilityLabel={'Formulario de login'}
+        accessibilityLabel={'Tela de formulario de login'}
         style={styles.container}>
         <View style={styles.containerForm}>
 
           <View style={styles.form}>
-            <Text style={styles.title}>
+            <Text
+              accessible={true}
+              accessibilityLabel={'Olá novamente, insira os dados para entrar'}
+              style={styles.title}>
               Olá novamente, insira os dados para entrar
             </Text>
 
             <View style={styles.containerInput}>
-              <FormTitle title="Email" />
+              <FormTitle
+                accessibilityLabel={'Email'}
+                title="Email" />
               <ListDivider />
 
               <Textarea
-                onBlur={handleInputBluer}
-                onFocus={handleInputFocus}
-                onChangeText={handleInputChange}
+                accessibilityLabel={'Digite seu email cadastrado'}
+                onChangeText={handleInputEmail}
                 placeholder="Digite seu email"
               />
 
-              <FormTitle title="Senha" />
+              <FormTitle
+                accessibilityLabel={'Senha'}
+                title="Senha" />
               <ListDivider />
 
               <Textarea
-                onBlur={handleInputBluer}
-                onFocus={handleInputFocus}
-                onChangeText={handleInputChange}
+                accessibilityLabel={'Digite sua senha cadastrada'}
+                onChangeText={handleInputPassword}
                 placeholder="Digite sua senha"
                 secureTextEntry={true}
               />
@@ -112,7 +105,10 @@ export function SignIn() {
             </View>
           </View>
 
-          <View style={styles.containerButton}>
+          <View
+            accessible={true}
+            accessibilityLabel={'Opções de botões logo a baixo'}
+            style={styles.containerButton}>
             <Button
               title="Entrar"
               accessible={true}
@@ -126,7 +122,9 @@ export function SignIn() {
               onPress={hadleCreateAccount}
               accessibilityLabel={'Pressione o botão para criar uma conta'}
             >
-              <Text style={styles.loginButton}>
+              <Text
+                accessibilityLabel={'Criar uma conta'}
+                style={styles.loginButton}>
                 Criar uma conta
               </Text>
             </TouchableOpacity>

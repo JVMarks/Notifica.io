@@ -21,7 +21,6 @@ const AuthRoutes = () => {
         tabBarAccessibilityLabel: 'Menu de navegação',
         tabBarInactiveTintColor: theme.colors.CreateAccont,
         tabBarActiveTintColor: theme.colors.line,
-        //tabBarActiveBackgroundColor: theme.colors.line,
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
@@ -30,19 +29,6 @@ const AuthRoutes = () => {
 
         }
       }}
-
-    /*
-    tabBarOptions={{
-      activeTintColor: theme.colors.on,
-      inactiveTintColor: theme.colors.on,
-      labelPosition: 'beside-icon',
-      cardStyle: {
-        paddingVertical: Platform.OS === 'ios' ? 20 : 0,
-        height: 88
-      },
-
-    }}
-    */
     >
 
       <AppTab.Screen

@@ -24,10 +24,7 @@
     {"key": "not urgent", "title": "Não urgente"}
   ],
 
-  "notification_frequencys":[
-    {"key": "uncommon", "title": "Incomum", "color": "RED"},
-    {"key": "recurrent", "title": "Recorrente", "color": "BLUE"}
-  ],
+
 
   "notification_categorys":[
     {"key": "cleaning", "title": "Limpeza"},
