@@ -27,8 +27,10 @@ const AuthRoutes = () => {
           paddingVertical: Platform.OS === 'ios' ? 20 : 0,
           height: 65,
 
-        }
+        },
       }}
+      //backBehavior='none'
+      //detachInactiveScreens={true}
     >
 
       <AppTab.Screen
@@ -105,6 +107,7 @@ const AuthRoutes = () => {
               color={color}
             />
           ))
+
         }}
       />
 

@@ -16,12 +16,10 @@ import { ListDivider } from '../../components/ListDivider';
 
 export function CreateAccount() {
 
-  //Radio  button
-  const [isDeficient, setisDeficient] = useState<string>();
-
   const [name, setName] = useState<string>();
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
+  const [isDeficient, setisDeficient] = useState<string>();
 
   const navigation = useNavigation();
 
@@ -65,15 +63,20 @@ export function CreateAccount() {
 
     try {
 
-      navigation.navigate('Confirmation', {
-        title: 'Prontinho',
-        subtitle: 'Agora vamos você pode notificar o que acontece em sua empresa.',
-        buttonTitle: 'Começar',
-        icon: 'smille',
-        nextScreen: 'Home',
-      })
+      if (isDeficient == 'Yes') {
+        navigation.navigate('Controls')
+      } else {
+        navigation.navigate('Confirmation', {
+          title: 'Prontinho',
+          subtitle: 'Agora vamos você pode notificar o que acontece em sua empresa.',
+          buttonTitle: 'Começar',
+          icon: 'smille',
+          nextScreen: 'Home',
+        })
+      }
+
     } catch {
-      Alert.alert('Não foi possivel entrar na conta 😥')
+      Alert.alert('Não foi possivel criar a conta 😥')
     }
   }
 
@@ -86,8 +89,8 @@ export function CreateAccount() {
         style={{ justifyContent: 'center', alignItems: 'center' }}
       >
         <LogoImg
-          width={220}
-          height={220}
+          width={180}
+          height={180}
           style={{ top: 0 }}
         />
       </View>
@@ -95,7 +98,8 @@ export function CreateAccount() {
       <View
         accessible={true}
         accessibilityLabel={'Tela de criação de conta'}
-        style={styles.container}>
+        style={styles.container}
+      >
 
         <View
           accessible={true}
@@ -155,7 +159,7 @@ export function CreateAccount() {
                 title="Possui alguma deficiência?"
               />
               <ListDivider />
-              <RadioButton.Group onValueChange={handleInputOption} value={isDeficient}>
+              <RadioButton.Group onValueChange={newValue => handleInputOption(newValue)} value={isDeficient}>
                 <View
                   accessible={true}
                   style={styles.radioButton}

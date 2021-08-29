@@ -72,7 +72,8 @@ export function NotificationList() {
         <View
           accessible={true}
           accessibilityLabel={'seleção de filtros'}
-          style={styles.header}>
+          style={styles.header}
+        >
           <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', }}>
             <TextDropDown
               accessible={true}

@@ -58,7 +58,8 @@ export function Home() {
         <View
           accessible={true}
           accessibilityLabel={'Opções disponiveis de botões para navegação'}
-          style={styles.containerButtons}>
+          style={styles.containerButtons}
+        >
           <TouchableOpacity
             accessible={true}
             accessibilityLabel={'pressione o botão para entrar na tela de criação de notificação'}

@@ -12,14 +12,14 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   containerForm:{
-    bottom: -35,
+    bottom: -20,
     width: width,
     borderRadius: 80,
     height: height/1.2,
     position: 'absolute',
     //justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
-    marginBottom: getStatusBarHeight() - height/9,
+    marginBottom: getStatusBarHeight() - height/8.5,
   },
   form:{
     paddingHorizontal: 65,
