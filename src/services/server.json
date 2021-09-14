@@ -1,0 +1,137 @@
+{
+  "floors":[
+    {"key": "ground-floor", "title": "Térrio"},
+    {"key": "first_floor", "title": "1° Andar"},
+    {"key": "second_floor", "title": "2° Andar"},
+    {"key": "third_floor", "title": "3° Andar"},
+    {"key": "fourth_floor", "title": "4° Andar"},
+    {"key": "fifth_floor", "title": "5° Andar"}
+  ],
+
+  "notification_environments":[
+    {"key": "womens_room", "title": "Banheiro feminino"},
+    {"key": "mens_room", "title": "Banheiro masculino"},
+    {"key": "hallway", "title": "Corredor"},
+    {"key": "cafeteria", "title": "Cantina"},
+    {"key": "elevator", "title": "Elevador"},
+    {"key": "meeting_room", "title": "Sala de reunião"}
+  ],
+
+  "notification_prioritys":[
+    {"key": "important", "title": "Importante"},
+    {"key": "not important", "title": "Não importante"},
+    {"key": "urgent", "title": "Urgente"},
+    {"key": "not urgent", "title": "Não urgente"}
+  ],
+
+
+
+  "notification_categorys":[
+    {"key": "cleaning", "title": "Limpeza"},
+    {"key": "maintenance", "title": "Manutenção"},
+    {"key": "retirement", "title": "Reforma"},
+    {"key": "setback", "title": "Contratempo"},
+    {"key": "accident", "title": "Acidente"}
+  ],
+
+  "notifications":[
+    {
+     "id": 1,
+     "floor": ["first_floor","1° Andar"],
+     "local": ["hallway", "Corredor"],
+     "priority":["important","Importante"],
+     "frequency":["recurrent", "Recorrente"],
+     "category":["setback", "Contratempo"],
+     "message": "Revisão nos disjuntores",
+     "notifier": {
+      "username": "João",
+      "hours": "10:54"
+    }
+    },
+    {
+      "id": 2,
+      "floor": ["first_floor","1° Andar"],
+      "local": ["hallway", "Corredor"],
+      "priority":["important","Importante"],
+      "frequency":["recurrent", "Recorrente"],
+      "category":["setback", "Contratempo"],
+      "message": "Revisão nos disjuntores",
+      "notifier": {
+        "username": "Antonio",
+        "hours": "13:54"
+      }
+     },
+     {
+      "id": 3,
+      "floor": ["first_floor","1° Andar"],
+      "local": ["hallway", "Corredor"],
+      "priority":["important","Importante"],
+      "frequency":["recurrent", "Recorrente"],
+      "category":["setback", "Contratempo"],
+      "message": "Revisão nos disjuntores",
+      "notifier": {
+        "username": "Willian",
+        "hours": "9:54"
+      }
+     },
+     {
+      "id": 4,
+      "floor": ["first_floor","1° Andar"],
+      "local": ["hallway", "Corredor"],
+      "priority":["important","Importante"],
+      "frequency":["recurrent", "Recorrente"],
+      "category":["setback", "Contratempo"],
+      "message": "Revisão nos disjuntores",
+      "notifier": {
+        "username": "Igor",
+        "hours": "11:54"
+      }
+     },
+     {
+      "id": 5,
+      "floor": ["first_floor","1° Andar"],
+      "local": ["hallway", "Corredor"],
+      "priority":["important","Importante"],
+      "frequency":["recurrent", "Recorrente"],
+      "category":["setback", "Contratempo"],
+      "message": "Revisão nos disjuntores",
+      "notifier": {
+        "username": "Victor",
+        "hours": "15:30"
+      }
+     }
+  ],
+
+  "users":[
+    {
+      "id": 1,
+      "name": "João",
+      "email": "abc@hotmail.com",
+      "password": "123"
+    },
+    {
+      "id": 2,
+      "name": "Antonio",
+      "email": "cba@hotmail.com",
+      "password": "123"
+    },
+    {
+      "id": 3,
+      "name": "Victor",
+      "email": "bbb@hotmail.com",
+      "password": "123"
+    },
+    {
+      "id": 4,
+      "name": "Igor",
+      "email": "ccc@hotmail.com",
+      "password": "123"
+    },
+    {
+      "id": 5,
+      "name": "Willian",
+      "email": "cba@hotmail.com",
+      "password": "123"
+    }
+  ]
+}
