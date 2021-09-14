@@ -1,7 +1,14 @@
 import React, { useState, useCallback } from 'react';
+<<<<<<< HEAD
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 import { View, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity } from 'react-native';
+=======
+import { RectButton } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { View, FlatList, KeyboardAvoidingView, Platform } from 'react-native';
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 
 import { DATA } from '../../utils/NotificationEX';
 
@@ -80,7 +87,11 @@ export function NotificationList() {
               style={styles.selecionFloor}
               placeholder="Selecione um andar"
             />
+<<<<<<< HEAD
             <TouchableOpacity
+=======
+            <RectButton
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
               onPress={handleOpenFilters}
               style={styles.headerfiltericon}
             >
@@ -91,7 +102,11 @@ export function NotificationList() {
                 size={32}
                 color={theme.colors.primary}
               />
+<<<<<<< HEAD
             </TouchableOpacity>
+=======
+            </RectButton>
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
           </View>
         </View>
 

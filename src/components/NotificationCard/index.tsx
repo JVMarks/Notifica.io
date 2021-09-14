@@ -1,12 +1,20 @@
 import React from 'react';
+<<<<<<< HEAD
 import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-native';
+=======
+import { View, Text } from 'react-native';
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 import { RectButton, RectButtonProps } from 'react-native-gesture-handler';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { Feather } from '@expo/vector-icons';
 
+<<<<<<< HEAD
 interface NotificationProps extends TouchableOpacityProps {
+=======
+interface NotificationProps extends RectButtonProps {
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
   data: {
     //andar: string,
     local: string,
@@ -22,7 +30,11 @@ interface NotificationProps extends TouchableOpacityProps {
 export function NotificationCard({ data, ...rest }: NotificationProps) {
 
   return (
+<<<<<<< HEAD
     <TouchableOpacity
+=======
+    <RectButton
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
       style={styles.container}
       {...rest}
     >
@@ -86,6 +98,10 @@ export function NotificationCard({ data, ...rest }: NotificationProps) {
           {`às ${data.horas}`}
         </Text>
       </View>
+<<<<<<< HEAD
     </TouchableOpacity>
+=======
+    </RectButton>
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
   );
 }

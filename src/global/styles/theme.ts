@@ -25,6 +25,7 @@ export const theme = {
     overlay: 'rgba(0,0,0,0.7)',
   },
 
+<<<<<<< HEAD
   dark_mode:{
     background: '#fff',
     color: '#000000',
@@ -35,6 +36,8 @@ export const theme = {
     background: '#000000',
   },
 
+=======
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
   fonts: {
     title700: 'Jost_700Bold',
     title600: 'Jost_600SemiBold',

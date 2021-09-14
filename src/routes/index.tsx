@@ -1,5 +1,6 @@
 import React from 'react';
 import { AppRoutes } from './app.routes';
+<<<<<<< HEAD
 import GlobalContext from "../context/index";
 import {
   NavigationContainer,
@@ -13,11 +14,15 @@ import {
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
+=======
+import { NavigationContainer } from '@react-navigation/native';
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 
 /*
 import { useAuth } from '../hooks/auth';
 import { SignIn } from '../screens/SignIn';
 import { Onboarding } from '../screens/Onboarding';
+<<<<<<< HEAD
 theme={DarkTheme}
 */
 
@@ -61,6 +66,16 @@ export function Routes() {
 
       </NavigationContainer>
     </PaperProvier>
+=======
+*/
+
+export function Routes() {
+
+  return (
+    <NavigationContainer>
+      <AppRoutes />
+    </NavigationContainer>
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
   )
 }
 

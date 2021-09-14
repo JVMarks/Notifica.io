@@ -33,7 +33,11 @@ react-native link react-native-gesture-handler
 expo install expo-auth-session expo-random
 yarn add dotenv babel-plugin-inline-dotenv
 yarn add react-native-uuid
+<<<<<<< HEAD
 expo install expo-speech
+=======
+
+>>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 ------------------------------------------
 to start the code:
 APP - expo start 
