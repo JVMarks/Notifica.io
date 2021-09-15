@@ -1,30 +1,17 @@
-<<<<<<< HEAD
 import React, { useState, useCallback } from 'react';
 import { ScrollView } from 'react-native-gesture-handler';
 import { List, Switch, useTheme } from 'react-native-paper';
-=======
-import { List, Switch } from 'react-native-paper';
-import React, { useState, useCallback } from 'react';
-import { ScrollView } from 'react-native-gesture-handler';
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Platform, KeyboardAvoidingView } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { styles } from './styles';
-<<<<<<< HEAD
 import * as Speech from 'expo-speech';
 import { connect } from 'react-redux';
 import { theme } from '../../global/styles/theme';
 import { MaterialIcons, Ionicons, FontAwesome, Foundation } from '@expo/vector-icons';
 
-=======
-import { theme } from '../../global/styles/theme';
-import { MaterialIcons, Ionicons, FontAwesome, Foundation } from '@expo/vector-icons';
-
-
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 import { Background } from '../../components/Background';
 import { ListDividerControls } from '../../components/ListDividerControls';
 
@@ -32,7 +19,6 @@ export function Controls() {
 
   const [loading, setLoading] = useState(true);
 
-<<<<<<< HEAD
   const navigation = useNavigation();
 
   //DARKMODE
@@ -87,19 +73,6 @@ export function Controls() {
 
     setisTxTSizeOn(!isTxTSizeOn);
   }
-=======
-  const [isChangeModeOn, setisChangeModeOn] = React.useState(false);
-  const [isContrastOn, setisContrastOn] = React.useState(false);
-  const [isTxTSizeOn, setisTxTSizeOn] = React.useState(false);
-  const [isAppReadOn, setAppReadOn] = React.useState(false);
-
-  const navigation = useNavigation();
-
-  const onToggleSwitchConstras = () => setisContrastOn(!isContrastOn);
-  const onToggleSwitchTxt = () => setisTxTSizeOn(!isTxTSizeOn);
-  const onToggleSwitchRead = () => setAppReadOn(!isAppReadOn);
-  const onToggleSwitchNightMode = () => setisChangeModeOn(!isChangeModeOn);
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 
   function hadleFeedback() {
     navigation.navigate('Feedback');
@@ -110,13 +83,8 @@ export function Controls() {
       <KeyboardAvoidingView
         accessible={true}
         style={styles.container}
-<<<<<<< HEAD
         accessibilityLabel={'Tela de configurações'}
         enabled={Platform.OS === "ios" ? true : false}
-=======
-        enabled={Platform.OS === "ios" ? true : false}
-        accessibilityLabel={'Tela criação de notificação'}
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
       >
@@ -210,11 +178,7 @@ export function Controls() {
                   accessibilityLabel={'Trocar tema'}
                   title="Trocar tema"
                   titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
-<<<<<<< HEAD
                   right={props => <Switch  {...props} value={paperTheme.dark} onValueChange={() => { onToggleSwitchNightMode() }} />} />
-=======
-                  right={props => <Switch  {...props} value={isChangeModeOn} onValueChange={onToggleSwitchNightMode} />} />
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
               </List.Accordion>
             </List.Section>
 

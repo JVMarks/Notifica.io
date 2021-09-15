@@ -13,14 +13,11 @@ type Props = {
   children: ReactNode;
 }
 
-<<<<<<< HEAD
 /*
 cria o seu context pra armazenar o tema (pode chamar de CustomThemeContext pra não confundir com o
 useTheme e ThemeContext do react navigation), aí os componentes internos podem usar as cores desse 
 tema, e também podem modificar as cores
 */
-=======
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 export function Background({ children }: Props) {
   const { CreateAccont, CreateAccont2 } = theme.colors;
 

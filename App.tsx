@@ -4,13 +4,10 @@ import { Routes } from './src/routes';
 import AppLoading from 'expo-app-loading';
 import { StatusBar, LogBox } from 'react-native';
 
-<<<<<<< HEAD
 /*Providers*/
 import { createStore } from 'redux';
 import { Provider as ReduxProvider } from 'react-redux';
 
-=======
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
 import {
   Jost_400Regular,
   Jost_500Medium,
@@ -38,7 +35,6 @@ export default function App() {
     return <AppLoading />
   }
 
-<<<<<<< HEAD
   //SIZE
   const reducer = (state = 12, action: any) => {
     switch (action.type) {
@@ -81,17 +77,3 @@ const themes = theme[deviceTheme] || theme.dark_mode;
 </ThemeProvider>
 
 */
-=======
-
-  return (
-    <Background>
-        <StatusBar
-          barStyle="light-content"
-          backgroundColor="transparent"
-          translucent
-        />
-        <Routes />
-    </Background>
-  );
-}
->>>>>>> 5179e4895ccd4946f6023f89a381c87da657779f
