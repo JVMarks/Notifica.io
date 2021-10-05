@@ -59,23 +59,22 @@ export function CreateAccount() {
 
         api.post('/users', {
 
-            //id: 3,
-            name: name,
-            email: email,
-            password: password,
-            pwd: false,
-            active: true,
-            //picture: "[B@79342daf",
-            roles: [
-              {
-                authority: "ROLE_EMPLOYEE",
-                id: 1
-              }
-            ]
-      
+          //id: 3,
+          name: name,
+          email: email,
+          password: password,
+          pwd: false,
+          active: true,
+          //picture: "[B@79342daf",
+          roles: [
+            {
+              authority: "ROLE_EMPLOYEE",
+              id: 1
+            }
+          ]
+
         })
-
-
+        
         navigation.navigate('Controls')
 
       } else {

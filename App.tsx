@@ -72,11 +72,7 @@ const themes = theme[deviceTheme] || theme.dark_mode;
 <ThemeProvider theme={themes}>
 
 </ThemeProvider>
-
-
    <AuthProvider>
           <Routes />
         </AuthProvider>
-
-
 */

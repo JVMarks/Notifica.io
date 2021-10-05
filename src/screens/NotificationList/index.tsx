@@ -56,7 +56,7 @@ export function NotificationList() {
     setOpenFiltersModal(true);
   };
 
-  function handleCloseFilters(){
+  function handleCloseFilters() {
     setOpenFiltersModal(false);
   }
 
@@ -177,7 +177,7 @@ export function NotificationList() {
           accessible={true}
           visible={OpenFiltersModal}
         >
-          <NotificationFilter closeModal={handleCloseFilters}/>
+          <NotificationFilter closeModal={handleCloseFilters} />
         </ModalView>
 
       </KeyboardAvoidingView>

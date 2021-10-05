@@ -35,7 +35,7 @@ yarn add react-native-uuid
 expo install expo-speech
 ------------------------------------------
 to start the code:
-APP - expo start 
+APP - expo start
 SERVER - json-server ./src/services/server.json --host 192.168.0.4 --port 19012
 
 Versão dos pacotes:
@@ -46,5 +46,5 @@ npm install --global yarn
 npm install -g expo-cli
 choco upgrade nodejs-lts
 
- npm cache clean -f 
+ npm cache clean -f
 */
