@@ -4,6 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
 
 import { api } from '../../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles';
 import LogoImg from '../../assets/logo2.svg';
@@ -36,6 +37,17 @@ export function CreateAccount() {
     setisDeficient(value);
   }
 
+  async function saveUser(user: any) {
+    if (user) {
+      try {
+        await AsyncStorage.setItem('@d2a95sd84kp08r:users', JSON.stringify(user));
+        console.log("TESTE saveUser", user)
+      } catch (e) {
+        console.log("erro", e)
+      }
+    }
+  }
+
   async function hadleSubmit() {
     try {
 
@@ -57,9 +69,7 @@ export function CreateAccount() {
 
       if (isDeficient == 'Yes') {
 
-        api.post('/users', {
-
-          //id: 3,
+        const credentials = {
           name: name,
           email: email,
           password: password,
@@ -72,16 +82,17 @@ export function CreateAccount() {
               id: 1
             }
           ]
+        }
 
-        })
-        
+        const response = await api.post('/users', credentials)
+        const user = response.data
+        await saveUser(user)
+
         navigation.navigate('Controls')
 
       } else {
 
-        api.post('/users', {
-
-          //id: 3,
+        const credentials = {
           name: name,
           email: email,
           password: password,
@@ -94,7 +105,11 @@ export function CreateAccount() {
               id: 1
             }
           ]
-        })
+        }
+
+        const response = await api.post('/users', credentials)
+        const user = response.data
+        await saveUser(user)
 
         navigation.navigate('Confirmation', {
           title: 'Prontinho',
@@ -111,22 +126,16 @@ export function CreateAccount() {
     }
   }
 
-  const fetchFloors = async () => {
+  const fetchUsers = async () => {
     const result = await api.get(`/users`);
     setTest(result.data.content);
     console.log(result.data.content)
   };
 
   useEffect(() => {
-    fetchFloors();
+    fetchUsers();
     console.log(test)
   }, [])
-
-  useEffect(() => {
-    console.log('UseEffect ', test)
-
-  }, [test])
-
 
   function hadleSingIn() {
     navigation.navigate('SignIn');
