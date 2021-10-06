@@ -17,7 +17,6 @@ export const styles = StyleSheet.create({
     borderRadius: 80,
     height: height/1.2,
     position: 'absolute',
-    //justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
     marginBottom: getStatusBarHeight() - 93,
   },

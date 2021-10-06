@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Platform, KeyboardAvoidingView } from 'react-native';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import * as Speech from 'expo-speech';
 import { connect } from 'react-redux';

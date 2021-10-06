@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { theme } from '../global/styles/theme';
 
-import { Home } from '../screens/Home';
 import { SignIn } from '../screens/SignIn';
 import { Feedback } from '../screens/Feedback';
 import { Controls } from '../screens/Controls';

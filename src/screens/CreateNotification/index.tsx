@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigation, useFocusEffect } from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, View, Alert } from 'react-native';
 
 import { styles } from './styles';
@@ -61,7 +61,6 @@ export function CreateNotification() {
     try {
 
       const result = await api.get(`/floors`);
-      //console.log(result.data.content)
 
       if (!result) {
         return setLoading(true)
@@ -79,7 +78,6 @@ export function CreateNotification() {
     try {
 
       const result = await api.get(`/locations`);
-      //console.log(result.data.content)
 
       if (!result) {
         return setLoading(true)
@@ -97,7 +95,6 @@ export function CreateNotification() {
     try {
 
       const result = await api.get(`/priorities`);
-      //console.log(result.data.content)
 
       if (!result) {
         return setLoading(true)
@@ -115,7 +112,7 @@ export function CreateNotification() {
     try {
 
       const result = await api.get(`/frequencies`);
-      //console.log(result.data.content)
+
       if (!result) {
         return setLoading(true)
       } else {
@@ -132,7 +129,7 @@ export function CreateNotification() {
     try {
 
       const result = await api.get(`/categories`);
-      //console.log(result.data.content)
+
       if (!result) {
         return setLoading(true)
       } else {
@@ -153,19 +150,13 @@ export function CreateNotification() {
     fetchCategories();
   }, []);
 
-  /*ESCUTANDO OS VALORES DENTRO DE FLOORS 
-  useEffect(() => {
-   console.log("UseEffect", floors)
-  }, [floors]);*/
-
   async function hadleCreateNotification() {
 
     try {
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
 
-      api.post('/notifications', {
-
+      const notificationDentails = {
         message: message,
         user: {
           id: userID
@@ -185,7 +176,9 @@ export function CreateNotification() {
         category: {
           id: selectedCategories
         }
-      })
+      }
+
+      api.post('/notifications', notificationDentails)
 
       navigation.navigate('Confirmation', {
         title: 'Tudo certo',
@@ -210,7 +203,6 @@ export function CreateNotification() {
         accessible={true}
         style={styles.container}
         accessibilityLabel={'Tela criação de notificação'}
-        //enabled={Platform.OS === "ios" ? true : false}
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
       >

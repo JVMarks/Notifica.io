@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { theme } from '../../global/styles/theme';
 
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';  
+import { getStatusBarHeight } from 'react-native-iphone-x-helper';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -11,45 +11,43 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  image:{
+  image: {
     top: 0,
     width: 150,
-    height: 150,  
+    height: 150,
     position: 'absolute',
-    //color: theme.colors.on,
     backgroundColor: theme.colors.on,
   },
-  containerForm:{
+  containerForm: {
     bottom: -60,
     width: width,
     borderRadius: 80,
-    height: height/1.26,
+    height: height / 1.26,
     position: 'absolute',
-    //justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
-    marginBottom: getStatusBarHeight() - height/5,
+    marginBottom: getStatusBarHeight() - height / 5,
   },
-  form:{
+  form: {
     paddingHorizontal: 70,
   },
   title: {
     fontSize: 17,
-    marginTop: 35,   
+    marginTop: 35,
     color: theme.colors.CreateAccont,
     fontFamily: theme.fonts.title500,
   },
-  containerInput:{
+  containerInput: {
     marginTop: 25,
   },
-  containerButton:{
+  containerButton: {
     marginTop: 35,
     paddingHorizontal: 35,
   },
-  loginButton:{
+  loginButton: {
     fontSize: 16,
     marginTop: 20,
     textAlign: 'center',
     color: theme.colors.CreateAccont,
     fontFamily: theme.fonts.title600,
-  } 
+  }
 });

@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from './styles';
 import { Avatar } from '../Avatar';
 
-
 export function Profile() {
 
   const navigation = useNavigation();
@@ -62,74 +61,3 @@ export function Profile() {
     </View>
   )
 }
-
-/*
-const fethUser = async () => {
-  try {
-
-    const credentials = {
-      name: userName,
-      //picture: userPicture
-    }
-
-    const userInfo = await api.post(`/users/`, credentials);
-
-    const UserNameDetails = userInfo.data.name;
-    //const UserNameDetails = userInfo.data.name.split('')[0];
-
-    await AsyncStorage.setItem('@d2a95sd84kp08r:users', JSON.stringify(UserNameDetails));
-
-
-    //setUserPicture('https://avatars.githubusercontent.com/u/50274461?v=4');
-    //setUserPicture(result.data.content[0].picture || 'https://avatars.githubusercontent.com/u/50274461?v=4');
-
-  } catch (error) {
-    Alert.alert('Algo deu errado, tente novamente mais tarde');
-    console.log("DEU PAU NA MAQUINA", error)
-  }
-};*/
-
-/*
-const fethUser = async () => {
-  try {
-    setLoading(true);
-
-    const userInfo = await api.get(`/users/${user.id}`);
-
-    const firstName = userInfo.data.name.split('')[0];
-
-    const userData = {
-      ...userInfo.data,
-      firstName,
-    }
-
-    await AsyncStorage.setItem('@d2a95sd84kp08r:users', JSON.stringify(userData));
-    setUser(userData);
-
-    //setUserPicture('https://avatars.githubusercontent.com/u/50274461?v=4');
-    //setUserPicture(result.data.content[0].picture || 'https://avatars.githubusercontent.com/u/50274461?v=4');
-
-  } catch (error) {
-    Alert.alert('Algo deu errado, tente novamente mais tarde');
-    console.log("DEU PAU NA MAQUINA", error)
-  } finally {
-    setLoading(false);
-  }
-};*/
-
-/*const fethUserName = async () => {
-  try {
-    const result = await api.get('/users')
-    //const user = await AsyncStorage.getItem(result.data.content[].name);
-    setUserName(result.data.content[0].name || '');
-
-  } catch (error) {
-    Alert.alert('Algo deu errado, tente novamente mais tarde');
-    console.log("DEU PAU NA MAQUINA", error)
-  }
-
-  useEffect(() => {
-    fethUser();
-  }, []);
-
-};*/

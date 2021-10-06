@@ -15,8 +15,8 @@ type Props = {
 export function Background({ children }: Props) {
 
   const { setState, state } = useContext(CustomThemeContext);
-  const [colorOne, setColorOne] = useState<string>("");
-  const [colorTwo, setColorTwo] = useState<string>("");
+  const [colorOne, setColorOne] = useState("");
+  const [colorTwo, setColorTwo] = useState("");
 
   function handleColor() {
     setState({

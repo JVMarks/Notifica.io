@@ -3,7 +3,6 @@ import { Text, TouchableOpacity, View, Alert } from 'react-native';
 import { useNavigation, StackActions } from '@react-navigation/native';
 
 import { api } from '../../services/api';
-//import { useAuth } from '../../hooks/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { styles } from './styles';
@@ -25,7 +24,7 @@ export function SignIn() {
     if (user) {
       try {
         await AsyncStorage.setItem('@d2a95sd84kp08r:users', JSON.stringify(user));
-        console.log("TESTE saveUser", user)
+        //console.log("TESTE saveUser", user)
       } catch (e) {
         console.log("erro", e)
       }
@@ -52,8 +51,6 @@ export function SignIn() {
 
         const response = await api.post('/users/login/', credentials)
         const user = response.data
-
-        console.log("Test button ", user)
         await saveUser(user)
 
         const resetAction = navigation.dispatch(
@@ -131,8 +128,8 @@ export function SignIn() {
                 placeholder="Digite sua senha"
                 underlineColorAndroid="rgba(0, 0, 0, 0)"
               />
-
             </View>
+
           </View>
 
           <View

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, ScrollView, Alert, ViewProps } from 'react-native';
 
 import { styles } from './styles';
@@ -8,12 +8,6 @@ import { Picker } from '@react-native-picker/picker';
 import { Button } from '../../components/Button';
 import { FormTitle } from '../../components/FormTitle';
 import { ListDivider } from '../../components/ListDivider';
-
-/*
-type FloorProps = {
-  id: number,
-  name: string
-}*/
 
 type LocationsProps = {
   id: number,
@@ -41,8 +35,6 @@ type Props = ViewProps & {
 
 export function NotificationFilter({ closeModal }: Props) {
 
-  //const [floors, setFloors] = useState<FloorProps[]>([]);
-  //const [selectedFloor, setSelectedFloor] = useState<FloorProps>();
   const [priorities, setPriorities] = useState<PrioritiesProps[]>([]);
   const [selectedPriorities, setSelectedPriorities] = useState<PrioritiesProps>();
   const [categories, setCategories] = useState<CategoriesProps[]>([]);
@@ -53,14 +45,12 @@ export function NotificationFilter({ closeModal }: Props) {
   const [selectedLocations, setSelectedLocations] = useState<LocationsProps>();
 
   const [filteredbyLocation, setFilteredbyLocation] = useState<LocationsProps[]>([]);
-  //const [filteredByFloor, setFilteredByFloor] = useState<FloorProps[]>([]);
   const [filteredByPrioritie, setFilteredByPrioritie] = useState<PrioritiesProps[]>([]);
   const [filteredByCategorie, setFilteredByCategorie] = useState<CategoriesProps[]>([]);
   const [filteredByFrequencie, setFilteredByFrequencie] = useState<FrequenciesProps[]>([]);
 
   function handleLocationSelected(location: any, floor: any, prioritie: any, categorie: any, frequencie: any) {
     setSelectedLocations(location);
-    //setSelectedFloor(floor);
     setSelectedPriorities(prioritie);
     setSelectedCategories(categorie);
     setSelectedFrequencies(frequencie);
@@ -68,38 +58,22 @@ export function NotificationFilter({ closeModal }: Props) {
     //if(location == 'all') return setFilteredbyLocation(locations)
 
     const filTeredLocation = locations.filter(locations => locations.name.includes(location))
-    //const filTeredFloor = floors.filter(floors => floors.name.includes(floor))
     const filTeredPrioritie = priorities.filter(priorities => priorities.name.includes(prioritie))
     const filTeredCategorie = categories.filter(categories => categories.name.includes(categorie))
     const filTeredFrequencie = frequencies.filter(frequencies => frequencies.name.includes(frequencie))
 
     setFilteredbyLocation(filTeredLocation);
-    //setFilteredByFloor(filTeredFloor);
     setFilteredByPrioritie(filTeredPrioritie);
     setFilteredByCategorie(filTeredCategorie);
     setFilteredByFrequencie(filTeredFrequencie);
     closeModal;
   }
 
-  /*
-  const fetchFloors = async () => {
-    try {
-      const result = await api.get(`/floors`);
-      setFloors(result.data.content);
-      //console.log(result.data.content)
-
-    } catch (error) {
-      Alert.alert('Algo deu errado, tente novamente mais tarde');
-      console.log("DEU PAU NA MAQUINA", error)
-    }
-  };*/
-
   const fetchLocations = async () => {
     try {
 
       const result = await api.get(`/locations`);
       setLocations(result.data.content);
-      //console.log(result.data.content)
 
     } catch (error) {
       Alert.alert('Algo deu errado, tente novamente mais tarde');
@@ -112,7 +86,6 @@ export function NotificationFilter({ closeModal }: Props) {
 
       const result = await api.get(`/priorities`);
       setPriorities(result.data.content);
-      //console.log(result.data.content)
 
     } catch (error) {
       Alert.alert('Algo deu errado, tente novamente mais tarde');
@@ -125,7 +98,6 @@ export function NotificationFilter({ closeModal }: Props) {
 
       const result = await api.get(`/frequencies`);
       setFrequencies(result.data.content);
-      //console.log(result.data.content)
 
     } catch (error) {
       Alert.alert('Algo deu errado, tente novamente mais tarde');
@@ -138,7 +110,6 @@ export function NotificationFilter({ closeModal }: Props) {
 
       const result = await api.get(`/categories`);
       setCategories(result.data.content);
-      //console.log(result.data.content)
 
     } catch (error) {
       Alert.alert('Algo deu errado, tente novamente mais tarde');
@@ -147,7 +118,6 @@ export function NotificationFilter({ closeModal }: Props) {
   };
 
   useEffect(() => {
-    //fetchFloors();
     fetchLocations();
     fetchPriorities();
     fetchFrequencies();
@@ -247,18 +217,3 @@ export function NotificationFilter({ closeModal }: Props) {
     </View>
   );
 }
-
-/*
-
-          <View style={styles.input}>
-            <Picker
-              mode='dialog'
-              selectedValue={selectedFloor}
-              onValueChange={itemValue => setSelectedFloor(itemValue)}
-            >
-              {floors?.map((itemValue) => {
-                return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
-              })}
-            </Picker>
-          </View>
-*/

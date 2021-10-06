@@ -39,8 +39,6 @@ type AuthorizationResponse = AuthSession.AuthSessionResult & {
   }
 }
 
-
-
 export const AuthContext = createContext({} as AuthContextData);
 
 function AuthProvider({ children }: AuthProviderProps) {

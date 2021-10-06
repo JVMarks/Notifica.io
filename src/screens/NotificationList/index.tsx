@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
 
 import { api } from '../../services/api';
@@ -29,6 +29,7 @@ type FloorProps = {
   id: number,
   name: string
 }
+
 export function NotificationList() {
 
   //Estado para funcionamento do filtro
@@ -44,7 +45,6 @@ export function NotificationList() {
     try {
       const result = await api.get(`/floors`);
       setFloors(result.data.content);
-      //console.log(result.data.content)
 
     } catch (error) {
       Alert.alert('Algo deu errado, tente novamente mais tarde');
@@ -101,10 +101,6 @@ export function NotificationList() {
     fetchFloors();
     fetchNotifications();
   }, [])
-
-  /*useEffect(() => {
-    console.log("useEffect", notifications)
-  }, [notifications])*/
 
   if (loading)
     return <Load />

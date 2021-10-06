@@ -1,10 +1,6 @@
-import { StyleSheet, Dimensions } from 'react-native';
-
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { StyleSheet } from 'react-native';
 
 import { theme } from '../../global/styles/theme';
-
-const { width, height } = Dimensions.get('screen');
 
 export const styles = StyleSheet.create({
   container: {
