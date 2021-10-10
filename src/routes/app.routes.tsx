@@ -10,6 +10,7 @@ import { Controls } from '../screens/Controls';
 import { Onboarding } from '../screens/Onboarding';
 import { Confirmation } from '../screens/Confirmation';
 import { CreateAccount } from '../screens/CreateAccount';
+import { CreateFeedBack } from '../screens/CreateFeedBack';
 import { NotificationList } from '../screens/NotificationList';
 import { CreateNotification } from '../screens/CreateNotification';
 
@@ -25,7 +26,6 @@ export function AppRoutes() {
         }
       }}
     >
-
       <Screen
         name="Onboarding"
         component={Onboarding}
@@ -70,7 +70,12 @@ export function AppRoutes() {
         name="Feedback"
         component={Feedback}
       />
-      
+
+      <Screen
+        name="CreateFeedback"
+        component={CreateFeedBack}
+      />
+
     </Navigator>
   )
 }

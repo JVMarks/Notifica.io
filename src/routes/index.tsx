@@ -1,31 +1,20 @@
 import React from 'react';
-
-import { useAuth } from '../hooks/auth';
-
-import { Onboarding } from '../screens/Onboarding';
-import { AppRoutes } from './app.routes';
-
-import GlobalContext from "../context/index";
 import {
   NavigationContainer,
   DefaultTheme as NavigationDefaultTheme,
   DarkTheme as NavigationDarkTheme
 } from '@react-navigation/native';
 
-//PROVIDER
 import {
   Provider as PaperProvier,
   DefaultTheme as PaperDefaultTheme,
   DarkTheme as PaperDarkTheme
 } from 'react-native-paper';
-/*
-import { SignIn } from '../screens/SignIn';
-import { Onboarding } from '../screens/Onboarding';
-theme={DarkTheme}
-*/
+
+import { AppRoutes } from './app.routes';
+import GlobalContext from "../context/index";
 
 export function Routes() {
-  const { user } = useAuth();
   const [isChangeModeOn, setisChangeModeOn] = React.useState(false);
 
   const CustomDefaultTheme = {

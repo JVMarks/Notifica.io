@@ -29,6 +29,13 @@ type CategoriesProps = {
   name: string
 }
 
+interface NotificationProps {
+  category?: any,
+  frequency?: any,
+  location?: any,
+  priorty?: any,
+}
+
 type Props = ViewProps & {
   closeModal: () => void;
 }
@@ -44,18 +51,27 @@ export function NotificationFilter({ closeModal }: Props) {
   const [locations, setLocations] = useState<LocationsProps[]>([]);
   const [selectedLocations, setSelectedLocations] = useState<LocationsProps>();
 
+  const [notifications, setNotifications] = useState<NotificationProps[]>([]);
   const [filteredbyLocation, setFilteredbyLocation] = useState<LocationsProps[]>([]);
   const [filteredByPrioritie, setFilteredByPrioritie] = useState<PrioritiesProps[]>([]);
   const [filteredByCategorie, setFilteredByCategorie] = useState<CategoriesProps[]>([]);
   const [filteredByFrequencie, setFilteredByFrequencie] = useState<FrequenciesProps[]>([]);
 
-  function handleLocationSelected(location: any, floor: any, prioritie: any, categorie: any, frequencie: any) {
+  function handleLocationSelected(location: any, prioritie: any, categorie: any, frequencie: any) {
     setSelectedLocations(location);
     setSelectedPriorities(prioritie);
     setSelectedCategories(categorie);
     setSelectedFrequencies(frequencie);
 
-    //if(location == 'all') return setFilteredbyLocation(locations)
+    if (location == 'all') {
+      //return setFilteredbyLocation(notifications);
+    } else if (prioritie == 'all') {
+      //return setFilteredByPrioritie(notifications);
+    } else if (categorie == 'all') {
+      //return setFilteredByCategorie(notifications);
+    } else if (frequencie == 'all') {
+      //return setFilteredByFrequencie(notifications);
+    }
 
     const filTeredLocation = locations.filter(locations => locations.name.includes(location))
     const filTeredPrioritie = priorities.filter(priorities => priorities.name.includes(prioritie))
@@ -124,6 +140,38 @@ export function NotificationFilter({ closeModal }: Props) {
     fetchCategories();
   }, []);
 
+  /* 
+    useEffect(() => {
+    async function fetchNotification() {
+      const { data } = await api
+        .get('plants_environments?_sort=title&_order=asc');
+      setNotification([
+        {
+          key: 'all',
+          title: 'Todos',
+        },
+        ...data
+      ]);
+    }
+    fetchNotification();
+  }, [])
+
+    useEffect(() => {
+    async function fetchEnviroment() {
+      const { data } = await api
+        .get('plants_environments?_sort=title&_order=asc');
+      setEnviroments([
+        {
+          key: 'all',
+          title: 'Todos',
+        },
+        ...data
+      ]);
+    }
+    fetchEnviroment();
+  }, [])
+  */
+
   return (
     <View
       accessible={true}
@@ -142,6 +190,8 @@ export function NotificationFilter({ closeModal }: Props) {
 
           <View style={styles.input}>
             <Picker
+              accessible={true}
+              accessibilityLabel={selectedLocations?.name}
               mode='dialog'
               selectedValue={selectedLocations}
               onValueChange={itemValue => setSelectedLocations(itemValue)}
@@ -160,6 +210,8 @@ export function NotificationFilter({ closeModal }: Props) {
 
           <View style={styles.input}>
             <Picker
+              accessible={true}
+              accessibilityLabel={selectedPriorities?.name}
               mode='dialog'
               selectedValue={selectedPriorities}
               onValueChange={itemValue => setSelectedPriorities(itemValue)}
@@ -178,6 +230,8 @@ export function NotificationFilter({ closeModal }: Props) {
 
           <View style={styles.input}>
             <Picker
+              accessible={true}
+              accessibilityLabel={selectedFrequencies?.name}
               mode='dialog'
               selectedValue={selectedFrequencies}
               onValueChange={itemValue => setSelectedFrequencies(itemValue)}
@@ -196,6 +250,8 @@ export function NotificationFilter({ closeModal }: Props) {
 
           <View style={styles.input}>
             <Picker
+              accessible={true}
+              accessibilityLabel={selectedCategories?.name}
               mode='dialog'
               selectedValue={selectedCategories}
               onValueChange={itemValue => setSelectedCategories(itemValue)}

@@ -45,4 +45,17 @@ export const styles = StyleSheet.create({
     borderColor: theme.colors.bluelight,
     backgroundColor: theme.colors.bluelight,
   },
+  loadingcontainer: {
+    width: '100%',
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  loadingtxt: {
+    fontFamily: theme.fonts.title500,
+    fontSize: 15,
+    opacity: 0.3,
+    marginTop: 25,
+    bottom: 0,
+  }
 });

@@ -18,19 +18,26 @@ export const theme = {
     black: '#000000',
     line: '#E5E5E5',
     heading: '#3F72AF',
-    bluelight:'#DBE2EF',
+    bluelight: '#DBE2EF',
     highlight: '#364E69',
     CreateAccont: '#112D4E',
     CreateAccont2: '#225B9C',
     overlay: 'rgba(0,0,0,0.7)',
+
+    nivel1_1: '#111d4e',
+    nivel1_2: '#22419c',
+    nivel2_1: '#4e1144',
+    nivel2_2: '#80229c',
+    nivel3_1: '#4e1123',
+    nivel3_2: '#9c2259',
   },
 
-  dark_mode:{
+  dark_mode: {
     background: '#fff',
     color: '#000000',
   },
 
-  light:{
+  light: {
     color: '#fff',
     background: '#000000',
   },

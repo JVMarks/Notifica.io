@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { View, FlatList, KeyboardAvoidingView, Platform, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
+import {
+  View,
+  FlatList,
+  KeyboardAvoidingView,
+  Platform,
+  TouchableOpacity,
+  ActivityIndicator,
+  Alert,
+  Text
+} from 'react-native';
 
 import { api } from '../../services/api';
 import { Picker } from '@react-native-picker/picker';
@@ -13,6 +22,7 @@ import { ModalView } from '../../components/ModelView';
 import { Background } from '../../components/Background';
 import { NotificationCard } from '../../components/NotificationCard';
 import { NotificationFilter } from '../../components/NotificationFilter';
+import { SkipButton } from '../../components/SkipButton';
 
 interface NotificationProps {
   id: number,
@@ -144,30 +154,33 @@ export function NotificationList() {
             </TouchableOpacity>
           </View>
         </View>
-
-        <FlatList
-          accessible={true}
-          accessibilityLabel={"lista de notifiçãoes do dia"}
-          data={filteredNotifica}
-          keyExtractor={item => String(item)}
-          renderItem={({ item }) => (
-            <NotificationCard
-              data={item}
-              onPress={() => null}
+        {
+          !filteredNotifica ?
+            <FlatList
+              accessible={true}
+              accessibilityLabel={"lista de notifiçãoes do dia"}
+              data={filteredNotifica}
+              keyExtractor={item => String(item)}
+              renderItem={({ item }) => (
+                <NotificationCard
+                  data={item}
+                  onPress={() => null}
+                />
+              )}
+              numColumns={1}
+              onEndReachedThreshold={0.1}
+              showsVerticalScrollIndicator={false}
+              onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+              ListFooterComponent={loadingMore ? <ActivityIndicator color={theme.colors.secondary100} /> : <></>}
+              contentContainerStyle={{
+                paddingTop: 15,
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
             />
-          )}
-          numColumns={1}
-          onEndReachedThreshold={0.1}
-          showsVerticalScrollIndicator={false}
-          onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
-          ListFooterComponent={loadingMore ? <ActivityIndicator color={theme.colors.secondary100} /> : <></>}
-          contentContainerStyle={{
-            paddingTop: 15,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        />
-
+            : <View style={styles.loadingcontainer}><Text style={styles.loadingtxt}>Ainda não temos nem uma notificação</Text></View>
+        }
+        
         <ModalView
           accessibilityLabel={'filtro ativado para selecionar as opções'}
           accessible={true}

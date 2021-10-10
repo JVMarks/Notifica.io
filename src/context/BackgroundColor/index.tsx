@@ -14,7 +14,7 @@ type PropsBackgrdContext = {
 const DEFAULT_VALUE = {
   state: {
     colorOne: theme.colors.CreateAccont,
-    colorTwo: theme.colors.CreateAccont2,
+    colorTwo: theme.colors.CreateAccont,
   },
   setState: () => { },
 };

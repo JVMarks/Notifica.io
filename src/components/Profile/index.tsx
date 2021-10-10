@@ -53,9 +53,9 @@ export function Profile() {
         </View>
 
         <Text
-          accessibilityLabel={'Já fez uma boa ação hoje?'}
+          accessibilityLabel={'Colabore com o próximo, notifique!'}
           style={styles.message}>
-          Já fez uma boa ação hoje?
+          Colabore com o próximo, notifique!
         </Text>
       </View>
     </View>

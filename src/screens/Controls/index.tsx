@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react';
-import { Platform, KeyboardAvoidingView } from 'react-native';
+import React, { useContext, useState, useEffect } from 'react';
+import { Platform, KeyboardAvoidingView, Text, View, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import * as Speech from 'expo-speech';
-import { connect } from 'react-redux';
+import Constants from "expo-constants";
+import Dialog from "react-native-dialog";
 import * as ImagePicker from 'expo-image-picker';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomThemeContext from "../../context/BackgroundColor/index";
@@ -13,17 +14,65 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { styles } from './styles';
+import { api } from '../../services/api';
 import { theme } from '../../global/styles/theme';
 import { MaterialIcons, Ionicons, FontAwesome, Foundation } from '@expo/vector-icons';
 
 import { Load } from '../../components/Load';
 import { Background } from '../../components/Background';
+import { SkipButton } from '../../components/SkipButton';
 import { ListDividerControls } from '../../components/ListDividerControls';
 
 export function Controls() {
 
   const navigation = useNavigation();
   //const [loading, setLoading] = useState(true);
+
+  const version = Constants.manifest?.version
+
+  const [userName, setUserName] = useState('');
+  const [visible, setVisible] = useState(false);
+
+  async function loadStorageUserName() {
+    const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
+    const name = JSON.parse(user || '').name;
+    setUserName(name || '');
+  }
+
+  useEffect(() => {
+    loadStorageUserName();
+  }, []);
+
+  const showDialog = () => {
+    setVisible(true);
+  };
+
+  const handleCancel = () => {
+    setVisible(false);
+  };
+
+  async function handleChangeName() {
+    try {
+      const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
+      const userID = JSON.parse(user || '').id;
+      //const name = JSON.parse(user || '').name;
+
+      if (!userName) {
+        Alert.alert("Para mudar o nome você primeiro tem que dizer ele")
+      } else {
+
+        const changeName = {
+            name: userName
+        }
+
+        api.put(`/users/${userID}`, changeName)
+        setVisible(false);
+      }
+    } catch (error) {
+      Alert.alert('Não foi possivel salvar seu nome👮‍♂️');
+      console.log('Deu pau na maquina', error)
+    }
+  };
 
   //Image
   const [images, setImages] = useState<string[]>([]);
@@ -65,14 +114,21 @@ export function Controls() {
         pitch: 0.93,
         rate: 0.93
       });
+    } else {
+      Speech.stop()
     }
 
     setAppReadOn(!isAppReadOn);
   }
 
   //CONTRASTI
-  const [isContrastOn, setisContrastOn] = React.useState(true);
+  const [isContrastOn, setisContrastOn] = React.useState(false);
   const { setState, state } = useContext(CustomThemeContext);
+
+  const [nivelOne, setNivelOne] = React.useState(false);
+  const [nivelTwo, setNivelTwo] = React.useState(false);
+  const [nivelThree, setNivelThree] = React.useState(false);
+
   const onToggleSwitchConstras = () => {
 
     if (!isContrastOn) {
@@ -82,10 +138,9 @@ export function Controls() {
         colorTwo: '#225B9C'
       })
 
-      /*
-      let timer: NodeJS.Timeout;
-      timer = setTimeout(<Load/>, 500);
-     */
+      setNivelOne(false);
+      setNivelTwo(false);
+      setNivelThree(false);
     } else if (isContrastOn) {
       setState({
         ...state,
@@ -98,18 +153,74 @@ export function Controls() {
     setisContrastOn(!isContrastOn);
   }
 
-  //TXT SIZE
-  const [isTxTSizeOn, setisTxTSizeOn] = React.useState(false);
-  const onToggleSwitchTxt = (dispatch: any) => {
+  const onToggleSwitchNivelOne = () => {
 
-    if (!isTxTSizeOn) {
-      dispatch({ type: 'INCREASE_FONT_SIZE' })
-    } else {
-      dispatch({ type: 'DECREASE_FONT_SIZE' })
+    if (!nivelOne) {
+      setState({
+        ...state,
+        colorOne: "#111d4e",
+        colorTwo: "#22419c"
+      })
+
+      setNivelTwo(false);
+      setNivelThree(false);
+      setisContrastOn(false);
+    } else if (nivelOne) {
+      setState({
+        ...state,
+        colorOne: "#112D4E",
+        colorTwo: "#112D4E"
+      })
+
+
     }
+    setNivelOne(!nivelOne);
+  }
+
+  const onToggleSwitchNivelTwo = () => {
+
+    if (!nivelTwo) {
+      setState({
+        ...state,
+        colorOne: "#4e1144",
+        colorTwo: "#80229c"
+      })
+
+      setNivelOne(false);
+      setNivelThree(false);
+      setisContrastOn(false);
+    } else if (nivelTwo) {
+      setState({
+        ...state,
+        colorOne: "#112D4E",
+        colorTwo: "#112D4E"
+      })
 
 
-    setisTxTSizeOn(!isTxTSizeOn);
+    }
+    setNivelTwo(!nivelTwo);
+  }
+
+  const onToggleSwitchNivelThree = () => {
+
+    if (!nivelThree) {
+      setState({
+        ...state,
+        colorOne: "#4e1123",
+        colorTwo: "#9c2259"
+      })
+
+      setNivelOne(false);
+      setNivelTwo(false);
+      setisContrastOn(false);
+    } else if (nivelThree) {
+      setState({
+        ...state,
+        colorOne: "#112D4E",
+        colorTwo: "#112D4E"
+      })
+    }
+    setNivelThree(!nivelThree);
   }
 
   function hadleFeedback() {
@@ -126,12 +237,17 @@ export function Controls() {
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         keyboardVerticalOffset={Platform.OS == "ios" ? 0 : 20}
       >
+
+        <SkipButton />
+
         <SafeAreaView
           accessible={true}
           style={styles.controlsContainer}
           accessibilityLabel={'Tela de configurações'}
         >
-          <ScrollView>
+          <ScrollView
+           style={{ marginBottom: '25%'}}
+          >
 
             <List.Section
               accessible={true}
@@ -145,10 +261,19 @@ export function Controls() {
                   accessible={true}
                   accessibilityLabel={'Editar nome'}
                   title="Editar nome"
-                  onPress={() => null}
+                  onPress={showDialog}
                   titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
                   left={props => <List.Icon {...props} icon={props => <Ionicons name='person-outline' size={24} />} />}
                 />
+                <Dialog.Container visible={visible}>
+                  <Dialog.Title>Você quer mesmo trocar o nome?</Dialog.Title>
+                  <Dialog.Description>
+                    Seus colegas de trabalho irão ver seu nome, evite palavras pejorativas😉!
+                  </Dialog.Description>
+                  <Dialog.Input value={userName} onChangeText={userName => setUserName(userName)} />
+                  <Dialog.Button label="Cancelar" onPress={handleCancel} />
+                  <Dialog.Button label="Mudar nome" onPress={handleChangeName} />
+                </Dialog.Container>
                 <List.Item
                   accessible={true}
                   accessibilityLabel={'Trocar foto de perfil'}
@@ -180,30 +305,30 @@ export function Controls() {
                 >
                   <List.Item
                     accessible={true}
-                    accessibilityLabel={'Daltonismo nivel 1'}
-                    title="Daltonismo nivel 1"
+                    accessibilityLabel={'Daltonismo Protanopia'}
+                    title="Daltonismo Protanopia"
                     onPress={() => null}
                     titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
                     left={props => <List.Icon {...props} icon={props => <Ionicons name='md-eye-sharp' size={24} />} />}
-                    right={props => <Switch  {...props} value={isTxTSizeOn} onValueChange={onToggleSwitchTxt} />}
+                    right={props => <Switch  {...props} value={nivelOne} onValueChange={onToggleSwitchNivelOne} />}
                   />
                   <List.Item
                     accessible={true}
-                    accessibilityLabel={'Daltonismo nivel 2'}
-                    title="Daltonismo nivel 2"
+                    accessibilityLabel={'Daltonismo Deuteranopia'}
+                    title="Daltonismo Deuteranopia"
                     onPress={() => null}
                     titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
                     left={props => <List.Icon {...props} icon={props => <Ionicons name='md-eye-sharp' size={24} />} />}
-                    right={props => <Switch  {...props} value={isTxTSizeOn} onValueChange={onToggleSwitchTxt} />}
+                    right={props => <Switch  {...props} value={nivelTwo} onValueChange={onToggleSwitchNivelTwo} />}
                   />
                   <List.Item
                     accessible={true}
-                    accessibilityLabel={'Daltonismo nivel 3'}
-                    title="Daltonismo nivel 3"
+                    accessibilityLabel={'Daltonismo Tritanopia'}
+                    title="Daltonismo Tritanopia"
                     onPress={() => null}
                     titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
                     left={props => <List.Icon {...props} icon={props => <Ionicons name='md-eye-sharp' size={24} />} />}
-                    right={props => <Switch  {...props} value={isTxTSizeOn} onValueChange={onToggleSwitchTxt} />}
+                    right={props => <Switch  {...props} value={nivelThree} onValueChange={onToggleSwitchNivelThree} />}
                   />
                 </List.Accordion>
 
@@ -215,15 +340,6 @@ export function Controls() {
                   titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
                   left={props => <List.Icon {...props} icon={props => <Foundation name="contrast" size={24} />} />}
                   right={props => <Switch  {...props} value={isContrastOn} onValueChange={onToggleSwitchConstras} />}
-                />
-                <List.Item
-                  accessible={true}
-                  accessibilityLabel={'Texto maior'}
-                  title="Texto maior"
-                  onPress={() => null}
-                  titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15 }}
-                  left={props => <List.Icon {...props} icon={props => <Ionicons name='md-text' size={24} />} />}
-                  right={props => <Switch  {...props} value={isTxTSizeOn} onValueChange={onToggleSwitchTxt} />}
                 />
                 <List.Item
                   accessible={true}
@@ -257,6 +373,21 @@ export function Controls() {
                 />
               </List.Accordion>
             </List.Section>
+          </ScrollView>
+        </SafeAreaView>
+
+            <View style={styles.versioncontainer}>
+              <Text style={styles.version}>
+                {`Versão ${version}`}
+              </Text>
+            </View>
+      </KeyboardAvoidingView>
+    </Background >
+  );
+}
+
+/*
+
 
             <ListDividerControls />
 
@@ -272,14 +403,10 @@ export function Controls() {
                   accessible={true}
                   accessibilityLabel={'Versão 0.04V'}
                   onPress={() => null}
-                  title="Versão 0.04V"
+                  title={`Versão ${version}`}
                   titleStyle={{ fontFamily: theme.fonts.title500, fontSize: 15, opacity: 0.3 }}
                 />
               </List.Accordion>
             </List.Section>
-          </ScrollView>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
-    </Background >
-  );
-}
+
+*/

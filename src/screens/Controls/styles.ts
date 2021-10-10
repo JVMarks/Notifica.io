@@ -9,12 +9,25 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
-  controlsContainer:{
+  controlsContainer: {
     top: 80,
     width: '90%',
-    borderRadius: 10,
-    height: height/1.4,
-   justifyContent: 'space-around',
+    borderRadius: 20,
+    height: height / 1.4,
+    justifyContent: 'space-around',
     backgroundColor: theme.colors.on,
   },
+  versioncontainer: {
+    width: '100%',
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+  version: {
+    fontFamily: theme.fonts.title500,
+    fontSize: 15,
+    opacity: 0.3,
+    marginTop: 25,
+    bottom: 0,
+  }
 });

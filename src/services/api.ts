@@ -23,8 +23,10 @@ yarn add date-fns
 yarn add lottie-react-native
 yarn add lottie-ios@3.2.3
 yarn add react-native-swiper-flatlist
+yarn add react-native-dialog
 
 USADOS:
+expo install expo-constants
 expo install expo-linear-gradient
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 yarn add react-native-gesture-handler

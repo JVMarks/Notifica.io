@@ -60,7 +60,13 @@ export function SignIn() {
         );
       }
     } catch (error) {
-      Alert.alert('Não foi possivel entrar na conta 😥')
+      if (error == 404) {
+        Alert.alert('Não conseguimos se conectar, tente novamente 🏎')
+      } else if (error = 422) {
+        Alert.alert('Senha ou Email incorreta, tente novamete 🏦')
+      } else {
+        Alert.alert('Não foi possivel entrar na conta 😥')
+      }
       console.log("Deu pau na maquina", error);
     }
   }

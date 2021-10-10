@@ -151,7 +151,6 @@ export function CreateNotification() {
   }, []);
 
   async function hadleCreateNotification() {
-
     try {
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
@@ -182,7 +181,7 @@ export function CreateNotification() {
 
       navigation.navigate('Confirmation', {
         title: 'Tudo certo',
-        subtitle: 'Sua notificação será enviada para seus colegar',
+        subtitle: 'Sua notificação será enviada para seus colegas',
         buttonTitle: 'Agradecemos sua contribuição',
         icon: 'smille',
         nextScreen: 'NotificationList',
@@ -192,7 +191,6 @@ export function CreateNotification() {
       Alert.alert('Não foi possivel salvar sua notificação🔔');
     }
   }
-
 
   if (loading)
     return <Load />
@@ -232,6 +230,8 @@ export function CreateNotification() {
 
             <View style={styles.input}>
               <Picker
+                accessible={true}
+                accessibilityLabel={selectedLocations?.name}
                 mode='dialog'
                 selectedValue={selectedLocations}
                 onValueChange={itemValue => setSelectedLocations(itemValue)}
@@ -250,6 +250,8 @@ export function CreateNotification() {
 
             <View style={styles.input}>
               <Picker
+                accessible={true}
+                accessibilityLabel={selectedPriorities?.name}
                 mode='dialog'
                 selectedValue={selectedPriorities}
                 onValueChange={itemValue => setSelectedPriorities(itemValue)}
@@ -268,6 +270,8 @@ export function CreateNotification() {
 
             <View style={styles.input}>
               <Picker
+                accessible={true}
+                accessibilityLabel={selectedFrequencies?.name}
                 mode='dialog'
                 selectedValue={selectedFrequencies}
                 onValueChange={itemValue => setSelectedFrequencies(itemValue)}
@@ -286,6 +290,8 @@ export function CreateNotification() {
 
             <View style={styles.input}>
               <Picker
+                accessible={true}
+                accessibilityLabel={selectedCategories?.name}
                 mode='dialog'
                 selectedValue={selectedCategories}
                 onValueChange={itemValue => setSelectedCategories(itemValue)}

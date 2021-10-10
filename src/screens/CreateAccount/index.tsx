@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { RadioButton } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { Alert, Text, TouchableOpacity, View } from 'react-native';
@@ -16,20 +16,12 @@ import { FormTitle } from '../../components/FormTitle';
 import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
 
-interface UsersProps {
-  name: string,
-  email: string,
-  password: string,
-  pwd: boolean,
-}
-
 export function CreateAccount() {
 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDeficient, setisDeficient] = useState('');
-  const [test, setTest] = useState<UsersProps[]>([]);
 
   const navigation = useNavigation();
 
@@ -67,13 +59,13 @@ export function CreateAccount() {
         return Alert.alert('👩 Por favor selecione uma das opções 👨');
       }
 
-      if (isDeficient == 'Yes') {
+      if (isDeficient == "true") {
 
         const credentials = {
           name: name,
           email: email,
           password: password,
-          pwd: false,
+          pwd: true,
           active: true,
           //picture: "[B@79342daf",
           roles: [
@@ -88,7 +80,13 @@ export function CreateAccount() {
         const user = response.data
         await saveUser(user)
 
-        navigation.navigate('Controls')
+        navigation.navigate('Confirmation', {
+          title: 'Prontinho',
+          subtitle: 'Agora você pode notificar o que acontece em sua empresa, primeiro pedimos que configure o app da forma que quiser',
+          buttonTitle: 'Começar',
+          icon: 'smille',
+          nextScreen: 'Controls',
+        })
 
       } else {
 
@@ -113,7 +111,7 @@ export function CreateAccount() {
 
         navigation.navigate('Confirmation', {
           title: 'Prontinho',
-          subtitle: 'Agora vamos você pode notificar o que acontece em sua empresa.',
+          subtitle: 'Agora você pode notificar o que acontece em sua empresa.',
           buttonTitle: 'Começar',
           icon: 'smille',
           nextScreen: 'Home',
@@ -125,17 +123,6 @@ export function CreateAccount() {
       console.log("DEU PAU NA MAQUINA", error)
     }
   }
-
-  const fetchUsers = async () => {
-    const result = await api.get(`/users`);
-    setTest(result.data.content);
-    console.log(result.data.content)
-  };
-
-  useEffect(() => {
-    fetchUsers();
-    console.log(test)
-  }, [])
 
   function hadleSingIn() {
     navigation.navigate('SignIn');
@@ -200,6 +187,8 @@ export function CreateAccount() {
                 accessible={true}
                 accessibilityLabel={'Digite seu email'}
                 value={email}
+                autoCorrect={false}
+                autoCapitalize="none"
                 onChangeText={setEmail}
                 placeholder="Digite seu email"
               />
@@ -213,9 +202,11 @@ export function CreateAccount() {
                 accessible={true}
                 accessibilityLabel={'Digite sua senha'}
                 value={password}
+                autoCorrect={false}
+                autoCapitalize="none"
+                secureTextEntry={true}
                 onChangeText={setPassword}
                 placeholder="Digite sua senha"
-                secureTextEntry={true}
               />
 
               <FormTitle
@@ -228,9 +219,9 @@ export function CreateAccount() {
                   accessible={true}
                   style={styles.radioButton}
                 >
-                  <RadioButton value="No" color={theme.colors.heading} />
+                  <RadioButton value="false" color={theme.colors.heading} />
                   <Text accessibilityLabel={'Não'} style={styles.txtRadio}>Não</Text>
-                  <RadioButton value="Yes" color={theme.colors.heading} />
+                  <RadioButton value="true" color={theme.colors.heading} />
                   <Text accessibilityLabel={'Sim'} style={styles.txtRadio}>Sim</Text>
                 </View>
               </RadioButton.Group>
