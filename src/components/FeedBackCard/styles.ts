@@ -69,5 +69,18 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(0, 0, 0, 0.65)',
     fontFamily: theme.fonts.text400,
+  },
+  buttonRemove: {
+    paddingLeft: 30,
+    right: 30,
+    width: 100,
+    height: 165,
+    padding: 15,
+    maxWidth: 300,
+    borderRadius: 20,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.nivel3_2,
   }
 });

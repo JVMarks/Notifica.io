@@ -9,6 +9,25 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start'
   },
+  items:{
+    display: 'flex',
+    height: 500,
+    justifyContent: 'space-between',
+    flexDirection: 'column',
+    marginBottom: '25%', 
+    //paddingHorizontal: 31, 
+    paddingVertical: 30
+  },
+  header: {
+    width: '100%',
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    paddingTop: 25,
+    paddingBottom: 15,
+    paddingHorizontal: 31, 
+    position: 'relative',
+    marginBottom: 0,
+  },
   controlsContainer: {
     top: 80,
     width: '90%',

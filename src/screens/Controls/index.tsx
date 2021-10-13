@@ -55,8 +55,7 @@ export function Controls() {
     try {
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
-      //const name = JSON.parse(user || '').name;
-
+      
       if (!userName) {
         Alert.alert("Para mudar o nome você primeiro tem que dizer ele")
       } else {
@@ -65,7 +64,8 @@ export function Controls() {
             name: userName
         }
 
-        api.put(`/users/${userID}`, changeName)
+        api.put(`/users/${userID}/changeName`, changeName)
+        api.get(`/users/${userID}`)
         setVisible(false);
       }
     } catch (error) {

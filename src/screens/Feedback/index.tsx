@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, View, KeyboardAvoidingView, SafeAreaView, ScrollView, Alert, Text, ActivityIndicator } from 'react-native';
+import { Platform, View, KeyboardAvoidingView, SafeAreaView, Alert, Text, ActivityIndicator } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { FlatList } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,36 +20,37 @@ interface FeedbackProps {
   id: number,
   theme: any,
   title: string,
-  scores?: number,
-  message?: string,
+  comment?: string,
+  moment: string,
   user: any
 }
 
 export function Feedback() {
 
   const [feedback, setFeedback] = useState<FeedbackProps[]>([]);
+  const [filterfeedback, setFilterFeedback] = useState<FeedbackProps[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
 
   const navigation = useNavigation();
 
-  /*
   async function fetchFeedBack() {
     try {
-
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
 
-      const result = await api.get(`/notifications/${userID}`);
+      const result = await api.get(`/feedbacks/user/${userID}?sort=id,desc`);
 
       if (!result) {
         return setLoading(true)
       }
       if (page > 1) {
         setFeedback(oldValue => [...oldValue, ...result.data.content])
+        setFilterFeedback(oldValue => [...oldValue, ...result.data.content])
       } else {
         setFeedback(result.data.content);
+        setFilterFeedback(result.data.content);
       }
 
       setLoading(false);
@@ -69,13 +70,43 @@ export function Feedback() {
     fetchFeedBack();
   }
 
-  if (loading)
-    return <Load />
-*/
+  //Romove
+  async function removeFeedBack(id: number): Promise<void> {
+    api.delete(`/feedbacks/${id}`)
+  }
+
+  function handleRemove(feedback: FeedbackProps) {
+    Alert.alert('Remover', `Deseja remover a ${feedback.title}?`, [
+      {
+        text: 'Não 😮',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😅',
+        onPress: async () => {
+          try {
+            await removeFeedBack(feedback.id);
+            setFeedback((oldData) => (
+              oldData.filter((item) => item.id !== feedback.id)
+            ));
+          } catch (error) {
+            Alert.alert('Não foi possivel remover! 😮');
+          }
+        }
+      }
+    ])
+  }
 
   function handleCreateFeedback() {
     navigation.navigate('CreateFeedback');
   }
+
+  useEffect(() => {
+    fetchFeedBack();
+  }, [])
+
+  if (loading)
+    return <Load />
 
   return (
     <Background>
@@ -95,50 +126,52 @@ export function Feedback() {
           style={styles.controlsContainer}
           accessibilityLabel={'Tela de configurações'}
         >
-          <ScrollView
-            style={{ marginBottom: '25%', paddingHorizontal: 31, paddingVertical: 30 }}
+          <View
+            style={styles.items}
           >
-            <FormTitle
-              accessibilityLabel={'Feedback Anteriores'}
-              title="Feedback Anteriores"
-            />
-            <ListDivider />
+            <View style={styles.header}>
+              <FormTitle
+                accessibilityLabel={'Feedback Anteriores'}
+                title="Feedback Anteriores"
+              />
+              <ListDivider />
+            </View>
             {
-              feedback == null ?
-                <FlatList
-                  accessible={true}
-                  accessibilityLabel={"lista de notifiçãoes do dia"}
-                  data={feedback}
-                  keyExtractor={item => String(item)}
-                  renderItem={({ item }) => (
-                    <FeedBackCard
-                      data={item}
-                      onPress={() => null}
-                    />
-                  )}
-                  numColumns={1}
-                  onEndReachedThreshold={0.1}
-                  showsVerticalScrollIndicator={false}
-                  onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
-                  ListFooterComponent={loadingMore ? <ActivityIndicator color={theme.colors.secondary100} /> : <></>}
-                  contentContainerStyle={{
-                    paddingTop: 15,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                />
+              feedback.length > 0 ? <FlatList
+                accessible={true}
+                accessibilityLabel={"lista de notifiçãoes do dia"}
+                data={filterfeedback}
+                keyExtractor={(item) => String(item.id)}
+                renderItem={({ item }) => (
+                  <FeedBackCard
+                    data={item}
+                    handleRemove={() => { handleRemove(item) }}
+                  />
+                )}
+                numColumns={1}
+                onEndReachedThreshold={0.1}
+                showsVerticalScrollIndicator={false}
+                onEndReached={({ distanceFromEnd }) => handleFetchMore(distanceFromEnd)}
+                ListFooterComponent={loadingMore ? <ActivityIndicator color={theme.colors.secondary100} /> : <></>}
+                contentContainerStyle={{
+                  paddingTop: 15,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  //maxHeight: 400,
+                }}
+              />
                 : <View style={styles.loadingcontainer}><Text style={styles.loadingtxt}>Você ainda não fez nenhum feedback</Text></View>
             }
-            <View style={{ margin: 15 }} />
-            <Button
-              accessible={true}
-              accessibilityLabel={'Pressione o botão para navegar para a tela de criação de feedback'}
-              title="Novo Feedback"
-              onPress={handleCreateFeedback}
-            />
-          </ScrollView>
+            <View style={{ paddingHorizontal: 30, paddingTop: 15 }}>
+              <Button
+                accessible={true}
+                accessibilityLabel={'Pressione o botão para navegar para a tela de criação de feedback'}
+                title="Novo Feedback"
+                onPress={handleCreateFeedback}
+              />
+            </View>
+          </View>
         </SafeAreaView>
-
       </KeyboardAvoidingView>
     </Background>
   );

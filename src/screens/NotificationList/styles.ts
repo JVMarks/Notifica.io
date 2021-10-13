@@ -29,6 +29,12 @@ export const styles = StyleSheet.create({
   headerfiltericon: {
     marginLeft: 5,
   },
+  headercontainer: {
+    flex: 0.8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
   input: {
     height: 39,
     fontSize: 13,
@@ -57,5 +63,6 @@ export const styles = StyleSheet.create({
     opacity: 0.3,
     marginTop: 25,
     bottom: 0,
+    color: theme.colors.white
   }
 });

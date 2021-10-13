@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { KeyboardAvoidingView, Platform, SafeAreaView, ScrollView, View, Alert } from 'react-native';
 
-import { styles } from './styles';
 import { api } from '../../services/api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { styles } from './styles';
 import { Picker } from '@react-native-picker/picker';
 
 import { Load } from '../../components/Load';
@@ -12,7 +14,6 @@ import { Textarea } from '../../components/Textarea';
 import { FormTitle } from '../../components/FormTitle';
 import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type FloorProps = {
   id: number,
@@ -174,7 +175,8 @@ export function CreateNotification() {
         },
         category: {
           id: selectedCategories
-        }
+        },
+        active: true
       }
 
       api.post('/notifications', notificationDentails)
@@ -243,6 +245,26 @@ export function CreateNotification() {
             </View>
 
             <FormTitle
+              accessibilityLabel={'Categoria'}
+              title="Categoria"
+            />
+            <ListDivider />
+
+            <View style={styles.input}>
+              <Picker
+                accessible={true}
+                accessibilityLabel={selectedCategories?.name}
+                mode='dialog'
+                selectedValue={selectedCategories}
+                onValueChange={itemValue => setSelectedCategories(itemValue)}
+              >
+                {categories?.map((itemValue) => {
+                  return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
+                })}
+              </Picker>
+            </View>
+
+            <FormTitle
               accessibilityLabel={'Prioridade'}
               title="Prioridade"
             />
@@ -277,26 +299,6 @@ export function CreateNotification() {
                 onValueChange={itemValue => setSelectedFrequencies(itemValue)}
               >
                 {frequencies?.map((itemValue) => {
-                  return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
-                })}
-              </Picker>
-            </View>
-
-            <FormTitle
-              accessibilityLabel={'Categoria'}
-              title="Categoria"
-            />
-            <ListDivider />
-
-            <View style={styles.input}>
-              <Picker
-                accessible={true}
-                accessibilityLabel={selectedCategories?.name}
-                mode='dialog'
-                selectedValue={selectedCategories}
-                onValueChange={itemValue => setSelectedCategories(itemValue)}
-              >
-                {categories?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
               </Picker>

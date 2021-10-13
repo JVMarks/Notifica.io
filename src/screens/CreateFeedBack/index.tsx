@@ -14,59 +14,32 @@ import { Background } from '../../components/Background';
 import { ListDivider } from '../../components/ListDivider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-type ThemeProps = {
-  id: number,
-  name: string
-}
-
 export function CreateFeedBack() {
 
   const navigation = useNavigation();
 
-  const [loading, setLoading] = useState(true);
-
-  const [theme, setTheme] = useState<ThemeProps[]>([]);
-  const [selectedTheme, setSelectedTheme] = useState<ThemeProps>();
-
+  const [theme, setTheme] = useState('');
   const [title, setTitle] = useState('');
-  const [message, setMessage] = useState('');
-
-  const fetchTheme = async () => {
-    try {
-
-      const result = await api.get(`/floors`);
-
-      if (!result) {
-        return setLoading(true)
-      } else {
-        setTheme(result.data.content);
-      }
-      setLoading(false);
-    } catch (error) {
-      Alert.alert('Algo deu errado, tente novamente mais tarde');
-      console.log("DEU PAU NA MAQUINA", error)
-    }
-  };
-
-  useEffect(() => {
-    fetchTheme();
-  }, []);
+  const [comment, setComment] = useState('');
 
   async function hadleCreateFeedBack() {
     try {
+
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
 
-      const notificationDentails = {
-        title: title,
+      const FeedBackDentails = {
         theme: theme,
-        message: message,
+        title: title,
+        comment: comment,
         user: {
           id: userID
         },
       }
 
-      api.post('/notifications', notificationDentails)
+      console.log("dados", FeedBackDentails)
+
+      api.post('/feedbacks', FeedBackDentails)
 
       navigation.navigate('Confirmation', {
         title: 'Tudo certo',
@@ -76,13 +49,11 @@ export function CreateFeedBack() {
         nextScreen: 'Feedback',
       });
 
+
     } catch {
       Alert.alert('Não foi possivel salvar seu feedback🔔');
     }
   }
-
-  if (loading)
-    return <Load />
 
   return (
     <Background>
@@ -101,19 +72,20 @@ export function CreateFeedBack() {
           <ScrollView>
             <FormTitle
               accessibilityLabel={'Escolha um tema'}
-              title="Tema"
+              title="Temas"
             />
             <ListDivider />
 
             <View style={styles.input}>
               <Picker
                 mode='dialog'
-                selectedValue={selectedTheme}
-                onValueChange={itemValue => setSelectedTheme(itemValue)}
+                selectedValue={theme}
+                onValueChange={itemValue => setTheme(itemValue)}
               >
-                {theme?.map((itemValue) => {
-                  return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
-                })}
+                <Picker.Item label="Elogios" value="Elogios" />
+                <Picker.Item label="Melhorias" value="Melhorias" />
+                <Picker.Item label="Dúvidas" value="Dúvidas" />
+                <Picker.Item label="Outros" value="Outros" />
               </Picker>
             </View>
             <View style={{ margin: 15 }} />
@@ -124,7 +96,7 @@ export function CreateFeedBack() {
             <ListDivider />
             <Textarea
               accessibilityLabel={'Escreva o titulo do feedback'}
-              placeholder="Digite o Título..."
+              placeholder="Digite o título..."
               value={title}
               onChangeText={title => setTitle(title)}
             />
@@ -140,8 +112,8 @@ export function CreateFeedBack() {
               maxLength={150}
               accessibilityLabel={'Para entendermos melhor seu feedback faça um comentario'}
               placeholder="Para entendermos melhor seu feedback deixe um comentario..."
-              value={message}
-              onChangeText={message => setMessage(message)}
+              value={comment}
+              onChangeText={comment => setComment(comment)}
               style={styles.txtcommet}
             />
             <View style={{ margin: 15 }} />

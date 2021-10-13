@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
     padding: 10,
     maxWidth: 300,
     marginBottom: 30,
-    borderRadius: 18,
+    borderRadius: 20,
     paddingHorizontal: 20,
     backgroundColor: theme.colors.white,
   },
@@ -69,5 +69,18 @@ export const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(0, 0, 0, 0.65)',
     fontFamily: theme.fonts.text400,
+  },
+  buttonRemove: {
+    paddingLeft: 30,
+    right: 30,
+    width: 100,
+    height: 165,
+    padding: 15,
+    maxWidth: 300,
+    borderRadius: 20,
+    position: 'relative',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: theme.colors.nivel3_2,
   }
 });

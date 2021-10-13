@@ -4,101 +4,133 @@ import { View, Text, TouchableOpacity, TouchableOpacityProps } from 'react-nativ
 import { styles } from './styles';
 import { Feather } from '@expo/vector-icons';
 import { theme } from '../../global/styles/theme';
-import { RectButton } from 'react-native-gesture-handler';
 
-interface NotificationProps extends TouchableOpacityProps {
+import Animated from 'react-native-reanimated';
+import { RectButton, Swipeable } from 'react-native-gesture-handler';
+
+export interface NotificationProps extends TouchableOpacityProps {
   data: {
     id: number,
     message?: string,
     moment: string,
     category: {
-      name: string
+      name: string,
+      id: number
     },
     frequency: {
-      name: string
+      name: string,
+      id: number
     },
     location: {
       floor: {
-        name: string
+        name: string,
+        id: number
       },
       name: string
     }
     priorty: {
-      name: string
+      name: string,
+      id: number
     }
     user: {
       name: string
     }
-  }
+  },
+  handleRemove: () => void;
 }
 
-export function NotificationCard({ data, ...rest }: NotificationProps) {
+export function NotificationCard({ data, handleRemove, ...rest }: NotificationProps) {
 
   return (
-    <TouchableOpacity
-      style={styles.container}
-      {...rest}
+
+    <Swipeable
+      overshootRight={false}
+      renderRightActions={() => (
+        <Animated.View>
+          <View>
+            <RectButton
+              style={styles.buttonRemove}
+              onPress={handleRemove}
+            >
+              <Feather
+                name="trash"
+                size={32}
+                color={theme.colors.white}
+              />
+
+            </RectButton>
+          </View>
+        </Animated.View>
+      )}
     >
-      <View
-        accessible={true}
-        accessibilityLabel={"Informações da notificação"}
-        style={styles.header}
+
+
+      <TouchableOpacity
+        style={styles.container}
+        {...rest}
       >
-        <Text
-          accessibilityLabel={data.location.name}
-          style={styles.title}
+        <View
+          accessible={true}
+          accessibilityLabel={"Informações da notificação"}
+          style={styles.header}
         >
-          {data.location.name}
-        </Text>
-        <RectButton style={styles.headerReadicon}>
-          <Feather
-            accessible={true}
-            accessibilityLabel={"Opções da notificação"}
-            name='more-horizontal'
-            size={32}
-            color={theme.colors.primary}
-          />
-        </RectButton>
-      </View>
+          <Text
+            accessibilityLabel={data.location.name}
+            style={styles.title}
+          >
+            {data.location.name}
+          </Text>
+          <RectButton style={styles.headerReadicon}>
+            <Feather
+              accessible={true}
+              accessibilityLabel={"Opções da notificação"}
+              name='more-horizontal'
+              size={32}
+              color={theme.colors.primary}
+            />
+          </RectButton>
+        </View>
 
-      <View style={styles.subheader}>
-        <Text
-          accessibilityLabel={data.frequency.name}
-          style={styles.priority}
-        >
-          {data.frequency.name}
-        </Text>
-        <Text
-          accessibilityLabel={data.category.name}
-          style={styles.category}
-        >
-          {data.category.name}
-        </Text>
-      </View>
+        <View style={styles.subheader}>
+          <Text
+            accessibilityLabel={data.frequency.name}
+            style={styles.priority}
+          >
+            {data.frequency.name}
+          </Text>
+          <Text
+            accessibilityLabel={data.category.name}
+            style={styles.category}
+          >
+            {data.category.name}
+          </Text>
+        </View>
 
-      <View style={styles.containerMessage}>
-        <Text
-          accessibilityLabel={data.message}
-          style={styles.message}
-        >
-          {data.message}
-        </Text>
-      </View>
+        <View style={styles.containerMessage}>
+          <Text
+            accessibilityLabel={data.message}
+            style={styles.message}
+          >
+            {data.message}
+          </Text>
+        </View>
 
-      <View style={styles.containerBottom}>
-        <Text
-          accessibilityLabel={`Notificado por ${data.user.name}`}
-          style={styles.bottomText}
-        >
-          {`Notificado por ${data.user.name}`}
-        </Text>
-        <Text
-          accessibilityLabel={`às ${data.moment}`}
-          style={styles.bottomText}
-        >
-          {`às ${data.moment}`}
-        </Text>
-      </View>
-    </TouchableOpacity>
+        <View style={styles.containerBottom}>
+          <Text
+            accessibilityLabel={`Notificado por ${data.user.name}`}
+            style={styles.bottomText}
+          >
+            {`Notificado por ${data.user.name}`}
+          </Text>
+          <Text
+            accessibilityLabel={`às ${data.moment}`}
+            style={styles.bottomText}
+          >
+            {`às ${data.moment}`}
+          </Text>
+        </View>
+      </TouchableOpacity>
+
+    </Swipeable>
   );
 }

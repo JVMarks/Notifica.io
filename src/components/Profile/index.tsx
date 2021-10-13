@@ -35,7 +35,7 @@ export function Profile() {
       <TouchableOpacity
         onPress={hadleControls}
       >
-        <Avatar urlImage={userAvatar || 'https://cdn-icons-png.flaticon.com/512/149/149071.png'} />
+        <Avatar urlImage={userAvatar || 'https://logodownload.org/wp-content/uploads/2019/08/dow-chemical-logo-0.png'} />
       </TouchableOpacity>
       <View>
         <View style={styles.user}>
@@ -61,3 +61,5 @@ export function Profile() {
     </View>
   )
 }
+
+//'https://cdn-icons-png.flaticon.com/512/149/149071.png'

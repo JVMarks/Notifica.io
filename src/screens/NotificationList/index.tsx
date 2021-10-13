@@ -9,20 +9,19 @@ import {
   Alert,
   Text
 } from 'react-native';
+import { useNavigation, StackActions } from '@react-navigation/native';
 
 import { api } from '../../services/api';
-import { Picker } from '@react-native-picker/picker';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
-import { MaterialIcons } from '@expo/vector-icons';
+import { MaterialIcons, AntDesign } from '@expo/vector-icons';
 
 import { Load } from '../../components/Load';
 import { ModalView } from '../../components/ModelView';
 import { Background } from '../../components/Background';
 import { NotificationCard } from '../../components/NotificationCard';
 import { NotificationFilter } from '../../components/NotificationFilter';
-import { SkipButton } from '../../components/SkipButton';
 
 interface NotificationProps {
   id: number,
@@ -41,6 +40,13 @@ type FloorProps = {
 }
 
 export function NotificationList() {
+
+
+  const navigation = useNavigation();
+
+  function hadleToHome() {
+    navigation.dispatch(StackActions.replace('Home'))
+  }
 
   //Estado para funcionamento do filtro
   const [notifications, setNotifications] = useState<NotificationProps[]>([]);
@@ -77,7 +83,7 @@ export function NotificationList() {
 
   async function fetchNotifications() {
     try {
-      const result = await api.get(`/notifications`);
+      const result = await api.get(`/notifications?sort=id,desc`);
 
       if (!result) {
         return setLoading(true)
@@ -107,6 +113,37 @@ export function NotificationList() {
     fetchNotifications();
   }
 
+  //Romove
+  async function removeNotification(id: number): Promise<void> {
+    try {
+      api.put(`/notifications/${id}/disableNotification`)
+    } catch (error) {
+      Alert.alert('Não foi possivel salvar sua notificação🔔');
+    }
+  }
+
+  function handleRemove(filteredNotifica: NotificationProps) {
+    Alert.alert('Remover', `Deseja remover a ${filteredNotifica.message}?`, [
+      {
+        text: 'Não 😮',
+        style: 'cancel'
+      },
+      {
+        text: 'Sim 😅',
+        onPress: async () => {
+          try {
+            await removeNotification(filteredNotifica.id);
+            setFilteredNotifica((oldData) => (
+              oldData.filter((item) => item.id !== filteredNotifica.id)
+            ));
+          } catch (error) {
+            Alert.alert('Não foi possivel remover! 😮');
+          }
+        }
+      }
+    ])
+  }
+
   useEffect(() => {
     fetchFloors();
     fetchNotifications();
@@ -128,18 +165,20 @@ export function NotificationList() {
           accessibilityLabel={'seleção de filtros'}
           style={styles.header}
         >
-          <View style={{ marginTop: 20, flexDirection: 'row', alignItems: 'center', marginLeft: 15 }}>
-            <View style={styles.input}>
-              <Picker
-                mode='dialog'
-                selectedValue={selectedFloor}
-                onValueChange={itemValue => setSelectedFloor(itemValue)}
-              >
-                {floors?.map((itemValue) => {
-                  return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
-                })}
-              </Picker>
-            </View>
+          <View style={styles.headercontainer}>
+            <TouchableOpacity
+              accessible={true}
+              accessibilityLabel={'pressione o icone Home para ir para pagina inicial'}
+              activeOpacity={0.6}
+              onPress={hadleToHome}
+            >
+              <AntDesign
+                size={38}
+                name='home'
+                color={theme.colors.primary}
+              />
+            </TouchableOpacity >
+
             <TouchableOpacity
               onPress={handleOpenFilters}
               style={styles.headerfiltericon}
@@ -155,16 +194,16 @@ export function NotificationList() {
           </View>
         </View>
         {
-          !filteredNotifica ?
+          filteredNotifica.length > 0 ?
             <FlatList
               accessible={true}
               accessibilityLabel={"lista de notifiçãoes do dia"}
               data={filteredNotifica}
-              keyExtractor={item => String(item)}
+              keyExtractor={(item) => String(item.id)}
               renderItem={({ item }) => (
                 <NotificationCard
                   data={item}
-                  onPress={() => null}
+                  handleRemove={() => { handleRemove(item) }}
                 />
               )}
               numColumns={1}
@@ -178,9 +217,9 @@ export function NotificationList() {
                 justifyContent: 'center',
               }}
             />
-            : <View style={styles.loadingcontainer}><Text style={styles.loadingtxt}>Ainda não temos nem uma notificação</Text></View>
+            : <View style={styles.loadingcontainer}><Text style={styles.loadingtxt}>No momento não temos nenhuma notificação</Text></View>
         }
-        
+
         <ModalView
           accessibilityLabel={'filtro ativado para selecionar as opções'}
           accessible={true}
