@@ -31,7 +31,7 @@ export function Onboarding() {
       >
         <SwiperFlatList
           autoplay
-          index={2}
+          index={0}
           horizontal
           data={DATA}
           autoplayLoop

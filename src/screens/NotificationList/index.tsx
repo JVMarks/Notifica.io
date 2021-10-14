@@ -21,9 +21,11 @@ import { Load } from '../../components/Load';
 import { ModalView } from '../../components/ModelView';
 import { Background } from '../../components/Background';
 import { NotificationCard } from '../../components/NotificationCard';
-import { NotificationFilter } from '../../components/NotificationFilter';
+import { CategoriesProps, FloorProps, FrequenciesProps, LocationsProps, NotificationFilter, PrioritiesProps } from '../../components/NotificationFilter';
+import { filterBy } from '../../libs/filterby';
 
-interface NotificationProps {
+
+export interface NotificationProps {
   id: number,
   message?: string,
   moment: string,
@@ -32,11 +34,6 @@ interface NotificationProps {
   location: any,
   priorty: any,
   user: any
-}
-
-type FloorProps = {
-  id: number,
-  name: string
 }
 
 export function NotificationList() {
@@ -53,22 +50,15 @@ export function NotificationList() {
   const [filteredNotifica, setFilteredNotifica] = useState<NotificationProps[]>([]);
 
   //Filter
-  const [floors, setFloors] = useState<FloorProps[]>([]);
-  const [selectedFloor, setSelectedFloor] = useState<FloorProps>();
   const [OpenFiltersModal, setOpenFiltersModal] = useState(false);
 
-  const fetchFloors = async () => {
-    try {
-      const result = await api.get(`/floors`);
-      setFloors(result.data.content);
+  const [selectedLocations, setSelectedLocations] = useState<LocationsProps>();
+  const [selectedFrequencies, setSelectedFrequencies] = useState<FrequenciesProps>();
+  const [selectedCategories, setSelectedCategories] = useState<CategoriesProps>();
+  const [selectedPriorities, setSelectedPriorities] = useState<PrioritiesProps>();
+  const [selectedFloor, setSelectedFloor] = useState<FloorProps>();
 
-    } catch (error) {
-      Alert.alert('Algo deu errado, tente novamente mais tarde');
-      console.log("DEU PAU NA MAQUINA", error)
-    }
-  };
-
-  function handleOpenFilters() {
+  async function handleOpenFilters() {
     setOpenFiltersModal(true);
   };
 
@@ -145,7 +135,6 @@ export function NotificationList() {
   }
 
   useEffect(() => {
-    fetchFloors();
     fetchNotifications();
   }, [])
 
@@ -224,8 +213,9 @@ export function NotificationList() {
           accessibilityLabel={'filtro ativado para selecionar as opções'}
           accessible={true}
           visible={OpenFiltersModal}
+          closeModal={handleCloseFilters}
         >
-          <NotificationFilter closeModal={handleCloseFilters} />
+          <NotificationFilter />
         </ModalView>
 
       </KeyboardAvoidingView>

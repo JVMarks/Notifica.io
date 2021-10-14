@@ -1,21 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigation, StackActions } from '@react-navigation/native';
-import { View, TouchableOpacity } from 'react-native';
+import { View, ViewProps, TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 import { theme } from '../../global/styles/theme';
 import { AntDesign } from '@expo/vector-icons';
+import AuthRoutes from '../../routes/tab.routes';
+
+type Props = ViewProps & {
+  closeModal: () => void;
+}
 
 export function SkipButton() {
 
   const navigation = useNavigation();
+  const [hidebar, sethidebar] = useState(false);
 
   function hadleToHome() {
-    navigation.dispatch( StackActions.replace('Home'))
+    navigation.dispatch(StackActions.replace('Home'))
+  }
+
+  function hadlesidebar() {
+
   }
 
   return (
-
     <View
       style={styles.container}
     >

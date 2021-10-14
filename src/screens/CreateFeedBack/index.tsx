@@ -28,28 +28,30 @@ export function CreateFeedBack() {
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
 
-      const FeedBackDentails = {
-        theme: theme,
-        title: title,
-        comment: comment,
-        user: {
-          id: userID
-        },
+      if (!theme && !title && !comment) {
+        return Alert.alert('Preencha todos os campos para entendermos seu feedback🔙');
+      } else {
+        const FeedBackDentails = {
+          theme: theme,
+          title: title,
+          comment: comment,
+          user: {
+            id: userID
+          },
+        }
+
+        console.log("dados", FeedBackDentails)
+
+        api.post('/feedbacks', FeedBackDentails)
+
+        navigation.navigate('Confirmation', {
+          title: 'Tudo certo',
+          subtitle: 'Nosso time ira analisar seu feedback e caso seja aprovado iremos te notificar',
+          buttonTitle: 'Agradecemos seu feedback',
+          icon: 'smille',
+          nextScreen: 'Feedback',
+        });
       }
-
-      console.log("dados", FeedBackDentails)
-
-      api.post('/feedbacks', FeedBackDentails)
-
-      navigation.navigate('Confirmation', {
-        title: 'Tudo certo',
-        subtitle: 'Nosso time ira analisar seu feedback e caso seja aprovado iremos te notificar',
-        buttonTitle: 'Agradecemos seu feedback',
-        icon: 'smille',
-        nextScreen: 'Feedback',
-      });
-
-
     } catch {
       Alert.alert('Não foi possivel salvar seu feedback🔔');
     }

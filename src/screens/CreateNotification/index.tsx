@@ -156,38 +156,43 @@ export function CreateNotification() {
       const user = await AsyncStorage.getItem('@d2a95sd84kp08r:users')
       const userID = JSON.parse(user || '').id;
 
-      const notificationDentails = {
-        message: message,
-        user: {
-          id: userID
-        },
-        location: {
-          id: selectedLocations,
-          floor: {
-            id: selectedFloor
-          }
-        },
-        priority: {
-          id: selectedPriorities
-        },
-        frequency: {
-          id: selectedFrequencies
-        },
-        category: {
-          id: selectedCategories
-        },
-        active: true
+      if (!selectedLocations && !selectedFloor && !selectedPriorities && !selectedFrequencies && !selectedCategories) {
+        return Alert.alert('Você primeiro precisa preencher os campos 🔔');
+      } else {
+        const notificationDentails = {
+          message: message,
+          user: {
+            id: userID
+          },
+          location: {
+            id: selectedLocations,
+            floor: {
+              id: selectedFloor
+            }
+          },
+          priority: {
+            id: selectedPriorities
+          },
+          frequency: {
+            id: selectedFrequencies
+          },
+          category: {
+            id: selectedCategories
+          },
+          active: true
+        }
+
+        api.post('/notifications', notificationDentails)
+
+        navigation.navigate('Confirmation', {
+          title: 'Tudo certo',
+          subtitle: 'Sua notificação será enviada para seus colegas',
+          buttonTitle: 'Agradecemos sua contribuição',
+          icon: 'smille',
+          nextScreen: 'NotificationList',
+        });
+
       }
-
-      api.post('/notifications', notificationDentails)
-
-      navigation.navigate('Confirmation', {
-        title: 'Tudo certo',
-        subtitle: 'Sua notificação será enviada para seus colegas',
-        buttonTitle: 'Agradecemos sua contribuição',
-        icon: 'smille',
-        nextScreen: 'NotificationList',
-      });
 
     } catch {
       Alert.alert('Não foi possivel salvar sua notificação🔔');
@@ -224,6 +229,7 @@ export function CreateNotification() {
                 selectedValue={selectedFloor}
                 onValueChange={itemValue => setSelectedFloor(itemValue)}
               >
+                <Picker.Item label="Escolha um andar" value={0} key={0} />
                 {floors?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
@@ -238,6 +244,7 @@ export function CreateNotification() {
                 selectedValue={selectedLocations}
                 onValueChange={itemValue => setSelectedLocations(itemValue)}
               >
+                <Picker.Item label="Escolha um local" value={0} key={0} />
                 {locations?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
@@ -258,6 +265,7 @@ export function CreateNotification() {
                 selectedValue={selectedCategories}
                 onValueChange={itemValue => setSelectedCategories(itemValue)}
               >
+                <Picker.Item label="Escolha uma categoria" value={0} key={0} />
                 {categories?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
@@ -278,6 +286,7 @@ export function CreateNotification() {
                 selectedValue={selectedPriorities}
                 onValueChange={itemValue => setSelectedPriorities(itemValue)}
               >
+                <Picker.Item label="Escolha uma prioridade" value={0} key={0} />
                 {priorities?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
@@ -298,6 +307,7 @@ export function CreateNotification() {
                 selectedValue={selectedFrequencies}
                 onValueChange={itemValue => setSelectedFrequencies(itemValue)}
               >
+                <Picker.Item label="Escolha uma frequencia" value={0} key={0} />
                 {frequencies?.map((itemValue) => {
                   return (<Picker.Item label={itemValue.name} value={itemValue.id} key={itemValue.id} />)
                 })}
