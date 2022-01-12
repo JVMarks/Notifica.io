@@ -1,6 +1,10 @@
+
+## 🗃 Brainstorming
+- [Notion](https://congruous-washer-e2c.notion.site/Notifica-io-41ddefb3d41843689de2a7e9daf51922)
+
 ## 🚀 Technologies
 
-Technologies that I used to develop this web client
+Technologies that I used to develop this mobile client
 
 - [ReactJS](https://reactjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
