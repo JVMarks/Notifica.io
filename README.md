@@ -26,7 +26,8 @@ Technologies that I used to develop this mobile client
 
 ### Requirements
 
-- Have this application's [API] running
+- Have this application's [API] running 
+- https://notifica-io.herokuapp.com/
 
 **Clone the project and access the folder**
 
